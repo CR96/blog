@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
   </head>
   <body>
-    {{ content }}
+    <a href="#content">Skip to content</button>
+    {% include navigation.html %}
+    <div id="content">
+      {{ content }}
+    </div>
   </body>
 </html>
