@@ -1,13 +1,26 @@
----
----
-<h1>{{ page.name }}</h1>
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+  </head>
+  <body>
+    <a href="#content">Skip to content</button>
+    {% include navigation.html %}
+    <div id="content">
+      <h1>{{ page.name }}</h1>
 
-{{ content }}
+      {{ content }}
 
-<h2>Posts</h2>
-<ul>
-  {% assign filtered_posts = site.posts | where: 'topic', page.short_name %}
-  {% for post in filtered_posts %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+      <h2>Posts</h2>
+      <ul>
+        {% assign filtered_posts = site.posts | where: 'topic', page.short_name %}
+        {% for post in filtered_posts %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
