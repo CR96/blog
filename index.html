@@ -14,7 +14,8 @@ title: Home
   {% for post in site.posts %}
     <li>
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-      {{ post.excerpt }}
+      {% assign topic = site.topics | where: 'short_name', post.topic | first %}
+      <p><a href="{{ topic.url }}">{{ topic.name }}</a> | Authored {{ post.date | date_to_long_string }} </p>
     </li>
   {% endfor %}
 </ul>
