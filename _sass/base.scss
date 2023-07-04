@@ -6,8 +6,9 @@ body {
   background: $backgroundColor;
   color: $bodyColor;
   font-family: $bodyFont;
+  line-height: 1.5;
 }
 
 .current {
-  color: red;
+  font-weight: bold;
 }
