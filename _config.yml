@@ -2,6 +2,9 @@ url: "https://coreyrowe.me" # the base hostname & protocol for your site, e.g. h
 baseurl: "" # the subpath of your site, e.g. /blog
 title: "Corey's Corner" # the name of your site, e.g. ACME Corp.
 
+# TODO: Add Google Analytics tracking ID before deploying to production
+google_analytics: ""
+
 collections:
   topics:
     output: true
