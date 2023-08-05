@@ -2,20 +2,9 @@
 title: Home
 ---
 
-<h1>Mode Shift in the Mitten</h1>
+<h1>Title</h1>
 
-<p>Hey, hi, hello! Welcome to Corey's Corner, the soon-to-be new home for my legislative tracking efforts, advocacy updates, and transit adventures in Michigan!</p>
+<p>Short website description</p>
 
-</p>You've probably landed here from my Twitter. Watch this space :&#41;</p>
-
-<h2>Latest posts</h2>
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-      {% assign topic = site.topics | where: 'short_name', post.topic | first %}
-      <p><a href="{{ topic.url }}">{{ topic.name }}</a> | Authored {{ post.date | date_to_long_string }} </p>
-    </li>
-  {% endfor %}
-</ul>
+<h2>Upcoming Events</h2>
+<p>Sample entry</p>
