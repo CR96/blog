@@ -1,6 +1,6 @@
 - name: Home
   link: /
 - name: Blog
-  link: /topics.html
+  link: /blog.html
 - name: Social
   link: /social.html
