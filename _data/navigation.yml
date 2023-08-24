@@ -4,3 +4,5 @@
   link: /blog
 - name: Social
   link: /social
+- name: RSS
+  link: /feed.xml
