@@ -1,5 +1,7 @@
 ---
-short_name: z-fun # I want it at the end of the list
+short_name: fun
 name: Just for Fun
+permalink: /topics/fun/
+
 ---
 Stuff that doesn't fit anywhere else. No particular rhyme or reason.

@@ -1,5 +1,5 @@
 ---
-title: "Social"
+title: Social
 permalink: /social/
 ---
 
