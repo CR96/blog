@@ -11,9 +11,11 @@
     {% endif %}
   </head>
   <body>
-    {% include navigation.html %}
-    <main id="main">
-      {{ content }}
-    </main>
+    <div class="container">
+      {% include navigation.html %}
+      <main id="main">
+        {{ content }}
+      </main>
+    </div>
   </body>
 </html>
