@@ -27,6 +27,7 @@ body {
 
 .main-nav {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   gap: 4px;
   padding: 0;
