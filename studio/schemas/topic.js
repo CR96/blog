@@ -1,6 +1,11 @@
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
+
 export default {
     name: "topic",
     type: "document",
+    orderings: [
+      orderRankOrdering
+    ],
     fields: [
       {
         name: "name",
@@ -32,6 +37,9 @@ export default {
           { type: "block" }
         ],
         validation: rule => rule.required()
-      }
+      },
+      orderRankField({
+        type: 'topic'
+      })
     ]
   }

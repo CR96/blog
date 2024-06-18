@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import schemas from "./studio/schemas/schema";
+import deskStructure from "./studio/desk-structure";
 
 export default defineConfig({
   name: "blog",
@@ -9,7 +10,7 @@ export default defineConfig({
   projectId: '06loossa',
   dataset: 'production',
   plugins: [
-    structureTool(),
+    structureTool({ structure: deskStructure }),
     visionTool()
   ],
   schema: {

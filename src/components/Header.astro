@@ -5,7 +5,7 @@ import groq from 'groq';
 import type { Topic } from '../groq';
 
 const headerQuery = groq`
-	*[_type == "topic"] | order(name asc)
+	*[_type == "topic"] | order(orderRank)
 `;
 const topics = await sanityClient.fetch<Topic[]>(headerQuery);
 ---
