@@ -1,0 +1,5 @@
+{
+    "path": "./src/**/*.{ts,tsx,js,jsx}", 
+    "schema": "./studio/typed-schema.json",
+    "generates": "./src/groq.d.ts" 
+}

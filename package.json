@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "types": "sanity schema extract --enforce-required-fields --path ./studio/typed-schema.json && sanity typegen generate"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^18.3.0",
     "astro": "^4.10.3",
     "astro-portabletext": "^0.10.0",
+    "groq": "^3.46.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sanity": "^3.46.1",
