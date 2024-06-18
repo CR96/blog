@@ -3,11 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "start": "astro preview",
+    "build": "astro build",
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro",
+    "check": "astro check",
     "types": "sanity schema extract --enforce-required-fields --path ./studio/typed-schema.json && sanity typegen generate"
   },
   "dependencies": {
