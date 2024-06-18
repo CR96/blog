@@ -26,7 +26,7 @@ export const GET: APIRoute = async (context) => {
 				title: post.title,
 				description: post.description,
 				pubDate: new Date(post.datePublished),
-				link: `/blog/${datedSlug}`,
+				link: `/${datedSlug}`,
 			}
 		}),
 		stylesheet: '/feed-style.xsl'

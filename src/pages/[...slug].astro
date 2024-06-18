@@ -1,11 +1,11 @@
 ---
 import { sanityClient } from "sanity:client";
 import groq from "groq";
-import type { Post, Topic } from "../../groq";
-import { generateDatedPostSlug } from "../../util";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import PortableText from "../../components/PortableText.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import type { Post, Topic } from "../groq";
+import { generateDatedPostSlug } from "../util";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PortableText from "../components/PortableText.astro";
+import FormattedDate from "../components/FormattedDate.astro";
 
 export async function getStaticPaths() {
 	const postPageQuery = groq`

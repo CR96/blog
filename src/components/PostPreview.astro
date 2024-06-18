@@ -17,7 +17,7 @@ const thumbnailSrc = post?.thumbnail && builder.image(post.thumbnail).format('we
 ---
 
 <p>
-    <b><a href={ `/blog/${datedSlug}` }>{ post.title }</a></b>
+    <b><a href={ `/${datedSlug}` }>{ post.title }</a></b>
     {` | Authored `}
     <FormattedDate date={ new Date(post.datePublished) } />
     <p><i>{ post.description }</i></p>
