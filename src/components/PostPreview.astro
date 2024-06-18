@@ -1,0 +1,27 @@
+---
+import type { Post } from '../groq';
+import { generateDatedPostSlug } from "../util";
+import { sanityClient } from 'sanity:client';
+import imageUrlBuilder from '@sanity/image-url';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+    post: Post
+}
+
+const { post } = Astro.props;
+const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
+
+const builder = imageUrlBuilder(sanityClient);
+const thumbnailSrc = post?.thumbnail && builder.image(post.thumbnail).format('webp').url();
+---
+
+<p>
+    <b><a href={ `/blog/${datedSlug}` }>{ post.title }</a></b>
+    {` | Authored `}
+    <FormattedDate date={ new Date(post.datePublished) } />
+    <p><i>{ post.description }</i></p>
+    { post?.thumbnail && (
+        <img src={ thumbnailSrc } alt={ post.thumbnail.alt } />
+    ) }
+</p>

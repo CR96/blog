@@ -6,7 +6,7 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://coreyrowe.me',
   integrations: [
     mdx(),
     sitemap(),
@@ -17,5 +17,9 @@ export default defineConfig({
       studioBasePath: '/admin'
     }),
     react()
-  ]
+  ],
+  redirects: {
+    '/blog': '/',
+    '/2023/09/03/milegtransit-directory': '/2023/01/25/milegtransit-directory'
+  }
 });

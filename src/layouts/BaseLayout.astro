@@ -1,0 +1,23 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+}
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead {...Astro.props} />
+    </head>
+    <body>
+        <Header />
+        <main id="content">
+            <slot />
+        </main>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+---
+layout: ../layouts/MarkdownLayout.astro
+title: Social
+---
+
+# Find me online
+
+## Twitter
+[@coreyjrowe](https://twitter.com/coreyjrowe)
+
+## Mastodon
+<!-- rel="me" is for site verification on Mastodon" -->
+<a target="_blank" rel="me" href="https://detmi.social/@coreyjrowe">@coreyjrowe@detmi.social</a>
+
+## Bluesky
+[@coreyjrowe](https://bsky.app/profile/coreyjrowe.bsky.social)
+
+## GitHub
+[CR96](https://github.com/CR96)
+
+## Medium
+[@coreyjrowe](https://medium.com/@coreyjrowe)
+
+## YouTube
+[MusicalMitten](https://www.youtube.com/@musicalmitten)

@@ -1,21 +1,45 @@
 ---
 import { sanityClient } from "sanity:client";
-import type { Post } from "../../groq";
+import groq from "groq";
+import type { Post, Topic } from "../../groq";
+import { generateDatedPostSlug } from "../../util";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableText from "../../components/PortableText.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
 
 export async function getStaticPaths() {
-    const posts = await sanityClient.fetch<Post[]>(`
-		*[_type == "post"]
-	`);
+	const postPageQuery = groq`
+		*[_type == "post"]{
+			...,
+			'topic': topic->
+		}
+	`;
+    const posts = await sanityClient.fetch<PostPageQueryResult[]>(postPageQuery);
 
 	return posts.map(post => ({
-		params: { slug: post.slug.current },
-		props: post,
+		params: { slug: generateDatedPostSlug(post.datePublished, post.slug.current) },
+		props: post
 	}));
 }
 
-type Props = Post;
+interface PostPageQueryResult extends Omit<Post, 'topic'> {
+	topic: Topic
+};
+type Props = PostPageQueryResult;
 const post = Astro.props;
 ---
 
-<PortableText value={post.content} />
+<BaseLayout
+	title={ post.title }
+	description={ post?.description }
+>
+	<h1>{ post.title }</h1>
+	<p>
+		<FormattedDate date={ new Date(post.datePublished) } />
+		{` - `}
+		<a href=`/topics/${ post.topic.slug.current }`>
+			{ post.topic.name }
+		</a>
+	</p>
+	<PortableText value={post.content} />
+</BaseLayout>
