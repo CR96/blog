@@ -4,4 +4,4 @@ name: Just for Fun
 permalink: /topics/fun/
 
 ---
-Stuff that doesn't fit anywhere else. No particular rhyme or reason.
+Stuff that doesn't fit anywhere else. Served with a complimentary cheese and cracker tray.

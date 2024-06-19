@@ -1,7 +1,7 @@
 ---
 short_name: legislative
-name: Legislative Updates
-permalink: /topics/legislative/
+name: "#MILegTransit: Legislative Updates"
+permalink: /topics/legislative-updates/
 
 ---
-Everything related to the Michigan Legislature.
+Everything transit in the Michigan Legislature.
