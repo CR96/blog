@@ -7,9 +7,52 @@ redirect_from:
   - /blog/
 ---
 
-<h1>Title</h1>
+<!-- HTML Meta Tags -->
+<title>The Café Car: Mode Shift in the Mitten</title>
+<meta name="description" content="A Michigan transit advocacy and travel blog by Corey Rowe">
 
-<p>Short website description</p>
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://coreyrowe.me/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Café Car: Mode Shift in the Mitten">
+<meta property="og:description" content="A Michigan transit advocacy and travel blog by Corey Rowe">
+<meta property="og:image" content="https://coreyrowe.me/img/cata_header.png">
 
-<h2>Upcoming Events</h2>
-<p>Sample entry</p>
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="coreyrowe.me">
+<meta property="twitter:url" content="https://coreyrowe.me/">
+<meta name="twitter:title" content="The Café Car: Mode Shift in the Mitten">
+<meta name="twitter:description" content="A Michigan transit advocacy and travel blog by Corey Rowe">
+<meta name="twitter:image" content="https://coreyrowe.me/assets/images/cata_header.png">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+
+<h1>The Café Car: Mode Shift in the Mitten</h1>
+
+<img alt="An electric bike on a CATA bus at the East Lansing Amtrak station as a train departs in the background." class="image" src="/assets/images/cata_header.png" />
+
+<p>Welcome aboard, travelers. Look over the menu and settle in. If you want to be notified when I publish a new article, <a href="https://coreyrowe.me/feed.xml">subscribe to the blog's RSS feed.</a></p>
+
+<p><i>If you aren't familiar with RSS, <a target="_blank" rel="noopener noreferrer" href="https://aboutfeeds.com/">here's how it works.</a></i></p>
+
+<h2>Michigan Services: Menu</h2>
+<ul>
+  <li>
+    <h3><a href="https://coreyrowe.me/calendar">Calendar of Events</a></h3>
+    <p>Your one-stop shop for upcoming transportation-related events in Metro Detroit.</p>
+  </li>
+  {% for topic in site.topics %}
+    <li>
+      <h3><a href="{{ topic.url }}">{{ topic.name }}</a></h3>
+      <p>{{ topic.content | markdownify }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
+<h2>About the Blog</h2>
+
+<img width="300px" max-width="100%" alt="Corey in a blue dress shirt and red tie wearing a helmet with his bike in the background" src="/assets/images/corey_bike_headshot.png"/>
+
+<!-- rel="me" is for site verification on Mastodon" -->
+<p>Hey, hi, hello, Corey here! Welcome to the new home for my legislative tracking efforts, advocacy updates, and transit adventures in Michigan. <a href="https://coreyrowe.me/social/">You can also find me on social media.</a></p>
