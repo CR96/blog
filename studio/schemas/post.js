@@ -1,4 +1,4 @@
-import { TwitterIcon } from "@sanity/icons";
+import { ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
 
 export default {
   name: "post",
@@ -67,7 +67,13 @@ export default {
               title: "Alt text",
               description: "Leave blank for decorative images"
             }
-          ]
+          ],
+          icon: ImageIcon
+        },
+        {
+          title: 'Video',
+          type: 'mux.video',
+          icon: PresentationIcon
         },
         {
           name: "tweet",

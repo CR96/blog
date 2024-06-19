@@ -1,0 +1,15 @@
+---
+const { asset } = Astro.props.node;
+console.log(Astro.props.node);
+---
+
+<mux-player playback-id={ asset.playbackId } />
+<script>
+    import '@mux/mux-player';
+</script>
+<style>
+    mux-player {
+        aspect-ratio: 16 / 9;
+        --media-accent-color: #444;
+    }
+</style>
