@@ -9,6 +9,25 @@ body {
   line-height: 1.5;
 }
 
+table {
+  text-align: left;
+}
+
+td {
+  padding: 0 64px 0 0;
+  white-space: pre-line;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
+
 .container {
   max-width: 740px;
   margin: 0 auto;
