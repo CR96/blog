@@ -1,3 +1,5 @@
+import { TwitterIcon } from "@sanity/icons";
+
 export default {
   name: "post",
   type: "document",
@@ -66,6 +68,19 @@ export default {
               description: "Leave blank for decorative images"
             }
           ]
+        },
+        {
+          name: "tweet",
+          type: "object",
+          fields: [
+            {
+              name: "id",
+              type: "string",
+              title: "Tweet ID",
+              validation: rule => rule.required()
+            }
+          ],
+          icon: TwitterIcon,
         }
       ],
       validation: rule => rule.required()

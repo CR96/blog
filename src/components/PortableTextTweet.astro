@@ -1,0 +1,7 @@
+---
+import { Tweet } from 'react-tweet';
+
+const { id } = Astro.props.node;
+---
+
+<Tweet id={ id } client:load />

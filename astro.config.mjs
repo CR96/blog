@@ -23,6 +23,13 @@ export default defineConfig({
     }),
     react()
   ],
+  vite: {
+    ssr: {
+      noExternal: [
+        'react-tweet'
+      ]
+    }
+  },
   redirects: {
     '/blog': '/',
     '/2023/09/03/milegtransit-directory': '/2023/01/25/milegtransit-directory'
