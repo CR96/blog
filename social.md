@@ -3,17 +3,23 @@ title: Social
 permalink: /social/
 ---
 
-# Mastodon
-[@coreyjrowe@detmi.social](https://detmi.social/@coreyjrowe)
+# Find me online
 
-# Twitter
+## Twitter
 [@coreyjrowe](https://twitter.com/coreyjrowe)
 
-# GitHub
+## Mastodon
+<!-- rel="me" is for site verification on Mastodon" -->
+<a target="_blank" rel="me" href="https://detmi.social/@coreyjrowe">@coreyjrowe@detmi.social</a>
+
+## Bluesky
+[@coreyjrowe](https://bsky.app/profile/coreyjrowe.bsky.social)
+
+## GitHub
 [CR96](https://github.com/CR96)
 
-# Medium
+## Medium
 [@coreyjrowe](https://medium.com/@coreyjrowe)
 
-# YouTube
+## YouTube
 [MusicalMitten](https://www.youtube.com/@musicalmitten)
