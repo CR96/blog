@@ -1,12 +1,18 @@
 - name: Home
   link: /
-- name: Blog
-  link: /blog/
+- name: Calendar
+  link: /calendar/
+- name: Adventures
+  link: /topics/adventures/
+- name: Advocacy
+  link: /topics/advocacy/
 - name: Meetings
   link: /topics/meetings/
+- name: Fun
+  link: /topics/fun/
+- name: "#MILegTransit"
+  link: /topics/legislative-updates/
 - name: Social
   link: /social/
-- name: "#MILegTransit"
-  link: /topics/legislative/
 - name: RSS
   link: /feed.xml
