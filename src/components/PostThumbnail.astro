@@ -1,0 +1,18 @@
+---
+import type { Post } from '../groq';
+import { sanityClient } from 'sanity:client';
+import imageUrlBuilder from '@sanity/image-url';
+
+interface Props {
+    thumbnail: Post["thumbnail"]
+};
+
+const { thumbnail } = Astro.props;
+
+if (!thumbnail) { return; }
+
+const builder = imageUrlBuilder(sanityClient);
+const thumbnailSrc = thumbnail && builder.image(thumbnail).format('webp').url();
+---
+
+<img src={ thumbnailSrc } alt={ thumbnail.alt } />

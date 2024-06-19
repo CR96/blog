@@ -6,6 +6,7 @@ import { generateDatedPostSlug } from "../util";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PortableText from "../components/PortableText.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import PostThumbnail from "../components/PostThumbnail.astro";
 
 export async function getStaticPaths() {
 	const postPageQuery = groq`
@@ -45,5 +46,8 @@ const post = Astro.props;
 			{ post.topic.name }
 		</a>
 	</p>
+	{ post?.thumbnail && (
+		<PostThumbnail thumbnail={ post.thumbnail } />
+	) }
 	<PortableText value={post.content} />
 </BaseLayout>
