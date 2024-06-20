@@ -14,3 +14,7 @@ If you plan on using TypeScript in your IDE, you'll need to run the type generat
 ```
 npm run types
 ```
+
+## Acknowledgements
+
+Thanks to @ivyrze for their work in building the site's foundation, and to @ssagano for the use of their typeface, Nacelle.
