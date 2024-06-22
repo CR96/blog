@@ -24,6 +24,9 @@ export default defineConfig({
     react()
   ],
   vite: {
+    css: {
+      transformer: 'lightningcss'
+    },
     ssr: {
       noExternal: [
         'react-tweet'
