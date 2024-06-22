@@ -1,0 +1,11 @@
+.nav-disclosure {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: var(--zinc-500);
+
+	&:hover,
+	&.active {
+		color: var(--zinc-900);
+	}
+}

@@ -1,0 +1,58 @@
+---
+import NavigationLink from './NavigationLink.astro';
+import type { HTMLAttributes } from 'astro/types';
+import NavigationDisclosure from './NavigationDisclosure';
+
+interface NavigationLink extends HTMLAttributes<'a'> {
+    label: string,
+    links?: NavigationLink[]
+};
+
+interface Props extends HTMLAttributes<'ul'> {
+    links: NavigationLink[]
+};
+
+const { links, ...listProps } = Astro.props;
+---
+
+<ul { ...listProps }>
+    { links.map(({ label, links, ...linkProps }) => (
+        <li>
+            { links?.length ? (
+                <NavigationDisclosure
+                    client:load
+                    label={ label }
+                    { ...linkProps }
+                >
+                    <Astro.self links={ links } />
+                </NavigationDisclosure>
+            ) : (
+                <NavigationLink { ...linkProps }>
+                    { label }
+                </NavigationLink>
+            )}
+        </li>
+    )) }
+</ul>
+<style>
+    ul {
+		display: inline-flex;
+		flex-wrap: wrap;
+		list-style: none;
+        margin: 0;
+		gap: 0.5rem 0.75rem;
+        position: relative;
+	}
+
+    ul ul {
+        position: absolute;
+        flex-direction: column;
+        top: 1.75rem;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid var(--zinc-300);
+        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>

@@ -1,34 +1,51 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import SkipLink from './SkipLink.astro';
+import NavigationLevel from './NavigationLevel.astro';
 import { sanityClient } from 'sanity:client';
 import groq from 'groq';
 import type { Topic } from '../groq';
+import NavigationLink from './NavigationLink.astro';
 
 const headerQuery = groq`
 	*[_type == "topic"] | order(orderRank)
 `;
 const topics = await sanityClient.fetch<Topic[]>(headerQuery);
+
+const links = [
+	{ label: "Home", href: "/" },
+	{ label: "Calendar", href: "/calendar" },
+	{
+		label: "Blog",
+		links: topics.map(topic => ({
+			label: topic.name,
+			href: `/topics/${ topic.slug.current }`
+		}))
+	}
+];
 ---
 
-<a href="#content">Skip to content</a>
-<nav>
-	<ul>
-		<li><HeaderLink href="/">Home</HeaderLink></li>
-		<li><HeaderLink href="/calendar">Calendar</HeaderLink></li>
-		{ topics.map(topic => (
-			<li><HeaderLink href={`/topics/${ topic.slug.current }`}>{ topic.name }</HeaderLink></li>
-		)) }
-		<li><HeaderLink href="/social">Social</HeaderLink></li>
-		<li><HeaderLink href="/feed.xml">RSS</HeaderLink></li>
-	</ul>
-</nav>
+<SkipLink />
+<header>
+	<nav>
+		<NavigationLink href="/">🚌</NavigationLink>
+		<NavigationLevel links={ links } />
+	</nav>
+</header>
 <style>
-	nav ul {
+	header {
+		position: fixed;
+		background: var(--zinc-50);
+		inset: 0 0 auto;
+		padding: 18px 12px;
+		font-size: 0.9rem;
+		z-index: 1;
+		border-bottom: 1px solid var(--zinc-200);
+	}
+	
+	nav {
 		display: flex;
-		flex-wrap: wrap;
-		list-style: none;
-		gap: 4px;
-		padding: 0;
-		margin: 0;
+		justify-content: space-between;
+		margin-inline: auto;
+		max-width: 760px;
 	}
 </style>

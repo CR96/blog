@@ -10,11 +10,26 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={href}
+	class:list={[className, { active: isActive }]}
+	aria-current={isActive ? 'page' : undefined}
+	{...props}
+>
 	<slot />
 </a>
 <style>
-	a.active {
-		font-weight: bold;
+	a {
+		color: var(--zinc-500);
+		text-decoration: none;
+		
+		&:hover,
+		&.active {
+			color: var(--zinc-900);
+		}
+		
+		&.active {
+			font-weight: 600;
+		}
 	}
 </style>

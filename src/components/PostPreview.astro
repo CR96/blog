@@ -12,12 +12,34 @@ const { post } = Astro.props;
 const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
 ---
 
-<p>
-    <b><a href={ `/${datedSlug}` }>{ post.title }</a></b>
-    {` | Authored `}
-    <FormattedDate date={ new Date(post.datePublished) } />
-    <p><i>{ post.description }</i></p>
+<article>
     { post?.thumbnail && (
-        <PostThumbnail thumbnail={ post.thumbnail } />
+        <a href={ `/${datedSlug}` }>
+            <PostThumbnail thumbnail={ post.thumbnail } />
+        </a>
     ) }
-</p>
+    <h3>
+        <a href={ `/${datedSlug}` }>{ post.title }</a>
+    </h3>
+    <p class="post-metadata">
+        {`Authored `}
+        <FormattedDate date={ new Date(post.datePublished) } />
+    </p>
+</article>
+<style>
+    h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-block: 0.25rem 0.5rem;
+        
+        & > a {
+            color: var(--zinc-950);
+            text-decoration: none;
+        }
+    }
+
+    .post-metadata {
+        font-weight: 300;
+        margin-top: 0;
+    }
+</style>

@@ -39,9 +39,9 @@ const post = Astro.props;
 	description={ post?.description }
 >
 	<h1>{ post.title }</h1>
-	<p>
+	<p class="post-metadata">
 		<FormattedDate date={ new Date(post.datePublished) } />
-		{` - `}
+		{` — `}
 		<a href=`/topics/${ post.topic.slug.current }`>
 			{ post.topic.name }
 		</a>
@@ -51,3 +51,15 @@ const post = Astro.props;
 	) }
 	<PortableText value={post.content} />
 </BaseLayout>
+<style>
+	h1 {
+		font-size: 2rem;
+	}
+
+	.post-metadata {
+		font-size: 1.25rem;
+		font-weight: 300;
+		color: var(--zinc-700);
+		margin-bottom: 3.5rem;
+	}
+</style>

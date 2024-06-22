@@ -5,3 +5,8 @@ const { id } = Astro.props.node;
 ---
 
 <Tweet id={ id } client:load />
+<style is:global>
+    .react-tweet-theme {
+        max-width: none;
+    }
+</style>

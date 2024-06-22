@@ -33,7 +33,16 @@ const topic = Astro.props;
 	<PortableText value={ topic.content } />
 
 	<h2>Posts</h2>
-	{ topic.posts.map(post => (
-		<PostPreview post={ post } />
-	)) }
+	<div class="post-grid">
+		{ topic.posts.map(post => (
+			<PostPreview post={ post } />
+		)) }
+	</div>
 </BaseLayout>
+<style>
+	.post-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+	}
+</style>

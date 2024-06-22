@@ -16,3 +16,8 @@ const thumbnailSrc = thumbnail && builder.image(thumbnail).format('webp').url();
 ---
 
 <img src={ thumbnailSrc } alt={ thumbnail.alt } />
+<style>
+    img {
+        aspect-ratio: 16 / 9;
+    }
+</style>
