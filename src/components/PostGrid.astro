@@ -1,0 +1,22 @@
+---
+import PostPreview from "./PostPreview.astro";
+import type { Post } from "../groq";
+
+interface Props {
+    posts: Post[]
+}
+
+const { posts } = Astro.props;
+---
+<div class="post-grid">
+    { posts.map(post => (
+        <PostPreview post={ post } />
+    )) }
+</div>
+<style>
+	.post-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+	}
+</style>

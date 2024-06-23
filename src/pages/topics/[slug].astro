@@ -3,7 +3,7 @@ import { sanityClient } from "sanity:client";
 import groq from "groq";
 import type { Topic, Post } from "../../groq";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PostPreview from "../../components/PostPreview.astro";
+import PostGrid from "../../components/PostGrid.astro";
 import PortableText from "../../components/PortableText.astro";
 
 export async function getStaticPaths() {
@@ -33,16 +33,5 @@ const topic = Astro.props;
 	<PortableText value={ topic.content } />
 
 	<h2>Posts</h2>
-	<div class="post-grid">
-		{ topic.posts.map(post => (
-			<PostPreview post={ post } />
-		)) }
-	</div>
+	<PostGrid posts={ topic.posts } />
 </BaseLayout>
-<style>
-	.post-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 16px;
-	}
-</style>
