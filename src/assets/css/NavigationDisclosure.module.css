@@ -2,10 +2,10 @@
 	display: flex;
 	align-items: center;
 	gap: 4px;
-	color: var(--zinc-500);
+	color: light-dark(var(--zinc-500), var(--zinc-400));
 
 	&:hover,
 	&.active {
-		color: var(--zinc-900);
+		color: light-dark(var(--zinc-900), var(--zinc-100));
 	}
 }

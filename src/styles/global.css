@@ -30,8 +30,9 @@ html {
 	letter-spacing: 0.15px;
 	text-underline-offset: 5px;
 	text-decoration-thickness: 2px;
-	color: var(--zinc-900);
-	background-color: var(--zinc-50);
+	color-scheme: light dark;
+	color: light-dark(var(--zinc-900), var(--zinc-300));
+	background-color: light-dark(var(--zinc-50), var(--zinc-900));
 }
 
 body {
@@ -55,18 +56,18 @@ h3,
 h4,
 h5,
 h6 {
-	color: var(--zinc-950);
+	color: light-dark(var(--zinc-950), var(--zinc-50));
 }
 
 a {
-	color: var(--blue-600);
+	color: light-dark(var(--blue-600), var(--blue-500));
 	text-decoration-color: currentColor;
 	text-decoration-style: dotted;
 	text-decoration-thickness: 3px;
 
 	&:hover,
 	&:focus {
-		color: var(--blue-800);
+		color: light-dark(var(--blue-800), var(--blue-400));
 	}
 }
 
