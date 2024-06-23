@@ -1,0 +1,14 @@
+---
+import { sanityClient } from "sanity:client";
+import groq from "groq";
+import type { Post } from "../groq";
+import PostGrid from "./PostGrid.astro";
+
+const featuredPostsQuery = groq`
+    *[_type == "post" && featured == true] | order(datePublished desc)
+`;
+
+const posts = await sanityClient.fetch<Post[]>(featuredPostsQuery);
+---
+
+<PostGrid posts={ posts } />

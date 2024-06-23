@@ -39,6 +39,12 @@ export default {
       validation: rule => rule.required()
     },
     {
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      initialValue: false
+    },
+    {
       name: "thumbnail",
       title: "Thumbnail",
       type: "image",
