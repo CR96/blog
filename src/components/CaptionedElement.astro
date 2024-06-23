@@ -1,0 +1,29 @@
+---
+import PortableText from './PortableText.astro';
+
+interface Props {
+    caption: string
+};
+
+const { caption } = Astro.props;
+---
+
+<figure>
+    <slot />
+    <figcaption>
+        <PortableText value={ caption } />
+    </figcaption>
+</figure>
+<style>
+    figcaption {
+        color: light-dark(var(--zinc-600), var(--zinc-400));
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1.35;
+        margin-block: 0.25rem 1.25rem;
+
+        & > :global(p:first-child) {
+            margin-top: 0;
+        }
+    }
+</style>

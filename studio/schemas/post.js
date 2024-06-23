@@ -1,3 +1,4 @@
+import caption from '../fields/caption';
 import { ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
 
 export default {
@@ -79,14 +80,25 @@ export default {
               type: "string",
               title: "Alt text",
               description: "Leave blank for decorative images"
-            }
+            },
+            caption
           ],
           icon: ImageIcon
         },
         {
+          name: 'video',
           title: 'Video',
-          type: 'mux.video',
-          icon: PresentationIcon
+          type: 'object',
+          icon: PresentationIcon,
+          fields: [
+            {
+              name: 'video',
+              type: 'mux.video',
+              title: 'Video',
+              validation: rule => rule.required()
+            },
+            caption
+          ]
         },
         {
           name: "tweet",
@@ -97,7 +109,8 @@ export default {
               type: "string",
               title: "Tweet ID",
               validation: rule => rule.required()
-            }
+            },
+            caption
           ],
           icon: TwitterIcon,
         }

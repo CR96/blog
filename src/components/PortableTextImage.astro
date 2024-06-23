@@ -1,11 +1,16 @@
 ---
 import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
+import CaptionedElement from './CaptionedElement.astro';
 
-const { asset, alt = "" } = Astro.props.node;
+const { asset, alt = "", caption } = Astro.props.node;
 
 const builder = imageUrlBuilder(sanityClient);
 const src = builder.image(asset).format('webp').url();
+
+const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
-<img src={ src } alt={ alt } />
+<WrapperElement { ...caption && { caption } }>
+    <img src={ src } alt={ alt } />
+</WrapperElement>

@@ -1,8 +1,14 @@
 ---
-const { asset } = Astro.props.node;
+import CaptionedElement from "./CaptionedElement.astro";
+
+const { video, caption } = Astro.props.node;
+
+const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
-<mux-player playback-id={ asset.playbackId } />
+<WrapperElement { ...caption && { caption } }>
+    <mux-player playback-id={ video.asset.playbackId } />
+</WrapperElement>
 <script>
     import '@mux/mux-player';
 </script>
