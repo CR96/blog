@@ -1,3 +1,5 @@
+import block from '../fields/block';
+import alt from '../fields/alt';
 import caption from '../fields/caption';
 import { ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
 
@@ -50,11 +52,7 @@ export default {
       title: "Thumbnail",
       type: "image",
       fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alt text"
-        }
+        alt
       ]
     },
     {
@@ -62,25 +60,11 @@ export default {
       title: "Content",
       type: "array",
       of: [
-        {
-          type: "block",
-          styles: [
-            { title: 'Heading 2', value: 'h2' },
-            { title: 'Heading 3', value: 'h3' },
-            { title: 'Heading 4', value: 'h4' },
-            { title: 'Heading 5', value: 'h5' },
-            { title: 'Heading 6', value: 'h6' }
-          ]
-        },
+        block,
         {
           type: "image",
           fields: [
-            {
-              name: "alt",
-              type: "string",
-              title: "Alt text",
-              description: "Leave blank for decorative images"
-            },
+            alt,
             caption
           ],
           icon: ImageIcon
