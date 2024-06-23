@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa6';
 
-import styles from '../assets/css/NavigationDisclosure.module.css';
+import styles from '../styles/components/NavigationDisclosure.module.css';
 
 interface Props {
     label: string,
