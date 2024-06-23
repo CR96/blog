@@ -1,6 +1,6 @@
 export default {
     name: "alt",
-    type: "string",
     title: "Alt text",
+    type: "string",
     description: "Leave blank for decorative images"
 };

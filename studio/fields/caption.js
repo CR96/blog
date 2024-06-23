@@ -1,7 +1,7 @@
 export default {
     name: "caption",
-    type: "array",
     title: "Caption",
+    type: "array",
     of: [
         {
             type: "block",

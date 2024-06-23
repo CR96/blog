@@ -62,6 +62,8 @@ export default {
       of: [
         block,
         {
+          name: "image",
+          title: "Image",
           type: "image",
           fields: [
             alt,
@@ -86,12 +88,13 @@ export default {
         },
         {
           name: "tweet",
+          title: "Tweet",
           type: "object",
           fields: [
             {
               name: "id",
-              type: "string",
               title: "Tweet ID",
+              type: "string",
               validation: rule => rule.required()
             },
             caption
