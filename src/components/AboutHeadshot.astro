@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import headshotImage from '../assets/images/corey-headshot.png';
+---
+
+<div class="about-container">
+    <Image src={ headshotImage } alt="Corey in a blue dress shirt and red tie wearing a helmet with his bike in the background" loading="lazy" class="headshot-image" />
+    <p class="text-bubble">Hey, hi, hello, Corey here!</p>
+</div>
+
+<style>
+    .about-container {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-right: 1rem;
+    }
+
+    .headshot-image {
+        max-width: 6rem;
+        max-height: 6rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .text-bubble {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 0.75rem;
+        border-bottom-left-radius: 0;
+        background: light-dark(var(--zinc-200), var(--zinc-800));
+        position: relative;
+
+        &:after {
+            --size: 8px;
+            content: '';
+            position: absolute;
+            width: var(--size);
+            height: var(--size);
+            left: calc(-1 * var(--size));    
+            bottom: 0;
+            clip-path: polygon(
+                100% 0, 0 100%, 100% 100%
+            );
+            background: inherit;
+        }
+    }
+</style>
