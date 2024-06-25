@@ -1,8 +1,7 @@
 ---
-import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { Post } from '../groq';
+import type { Post, Subject } from '../groq';
 import type { PortableTextMarkDefinition } from "@portabletext/types";
+import { resolveSanityRef } from '../util';
 
 type Block = Extract<Post['content'][number], { '_type': 'block' }>;
 interface NodeProps extends PortableTextMarkDefinition {
@@ -10,15 +9,9 @@ interface NodeProps extends PortableTextMarkDefinition {
 }
 
 const { markDef } : NodeProps = Astro.props.node;
-const { subject: subjectReference } = markDef;
+const { subject: subjectRef } = markDef;
 
-const subjectReferenceQuery = groq`
-    *[_type == "subject" && _id == $id][0]
-`;
-
-const subject = await sanityClient.fetch(subjectReferenceQuery, {
-    id: subjectReference._ref
-});
+const subject = await resolveSanityRef<Subject>(subjectRef);
 ---
 
 <a href={ `/subjects/${subject.slug.current}` }>

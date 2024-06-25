@@ -1,21 +1,15 @@
 ---
-import { sanityClient } from "sanity:client";
-import groq from "groq";
 import CaptionedElement from "./CaptionedElement.astro";
 import type { Post, MuxVideoAsset } from '../groq';
+import { resolveSanityRef } from '../util';
 
 type NodeProps = Extract<Post['content'][number], { '_type': 'video' }>;
 
 const { video, caption } : NodeProps = Astro.props.node;
-const { asset: assetReference } = video;
+const { asset: assetRef } = video;
 
-const assetReferenceQuery = groq`
-    *[_type == "mux.videoAsset" && _id == $id][0]
-`;
-
-const asset = await sanityClient.fetch<MuxVideoAsset>(assetReferenceQuery, {
-    id: assetReference?._ref
-});
+if (!assetRef) { return; }
+const asset = await resolveSanityRef<MuxVideoAsset>(assetRef);
 
 const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
