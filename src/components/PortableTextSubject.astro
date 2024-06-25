@@ -1,14 +1,12 @@
 ---
+import type { Props as PortableTextProps, Mark } from 'astro-portabletext/types';
 import type { Post, Subject } from '../groq';
-import type { PortableTextMarkDefinition } from "@portabletext/types";
 import { resolveSanityRef } from '../util';
 
 type Block = Extract<Post['content'][number], { '_type': 'block' }>;
-interface NodeProps extends PortableTextMarkDefinition {
-    markDef: Extract<NonNullable<Block['markDefs']>[number], { '_type': 'subject' }>;
-}
+type Props = PortableTextProps<Mark<Extract<NonNullable<Block['markDefs']>[number], { '_type': 'subject' }>>>;
 
-const { markDef } : NodeProps = Astro.props.node;
+const { markDef } = Astro.props.node;
 const { subject: subjectRef } = markDef;
 
 const subject = await resolveSanityRef<Subject>(subjectRef);

@@ -1,10 +1,13 @@
 ---
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
+import type { PortableTextProps } from 'astro-portabletext/types';
 import PortableTextImage from "./PortableTextImage.astro";
 import PortableTextTweet from './PortableTextTweet.astro';
 import PortableTextVideo from './PortableTextVideo.astro';
 import PortableTextSubject from './PortableTextSubject.astro';
 import PortableTextTable from './PortableTextTable.astro';
+
+type Props = PortableTextProps;
 
 const { value } = Astro.props;
 

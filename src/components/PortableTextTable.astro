@@ -1,9 +1,10 @@
 ---
+import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import type { Post } from '../groq';
 
-type NodeProps = Extract<Post['content'][number], { '_type': 'table' }>;
+type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'table' }>>;
 
-const { table, numHeader } : NodeProps = Astro.props.node;
+const { table, numHeader } = Astro.props.node;
 
 if (!table.rows) { return; }
 

@@ -1,11 +1,12 @@
 ---
+import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import { Tweet } from 'react-tweet';
 import CaptionedElement from './CaptionedElement.astro';
 import type { Post } from '../groq';
 
-type NodeProps = Extract<Post['content'][number], { '_type': 'tweet' }>;
+type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'tweet' }>>;
 
-const { id, caption } : NodeProps = Astro.props.node;
+const { id, caption } = Astro.props.node;
 
 const WrapperElement = caption ? CaptionedElement : Fragment;
 ---

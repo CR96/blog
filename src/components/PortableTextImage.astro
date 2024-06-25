@@ -1,13 +1,14 @@
 ---
+import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
 import type { Post, SanityImageAsset } from '../groq';
 import { resolveSanityRef } from '../util';
 
-type NodeProps = Extract<Post['content'][number], { '_type': 'image' }>;
+type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'image' }>>;
 
-const { asset: assetRef, alt = "", caption } : NodeProps = Astro.props.node;
+const { asset: assetRef, alt = "", caption } = Astro.props.node;
 
 if (!assetRef) { return; }
 const asset = await resolveSanityRef<SanityImageAsset>(assetRef);
