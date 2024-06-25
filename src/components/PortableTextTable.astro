@@ -1,5 +1,11 @@
 ---
-const { table, numHeader } = Astro.props.node;
+import type { Post } from '../groq';
+
+type NodeProps = Extract<Post['content'][number], { '_type': 'table' }>;
+
+const { table, numHeader } : NodeProps = Astro.props.node;
+
+if (!table.rows) { return; }
 
 const headerRows = table.rows.slice(0, numHeader);
 const regularRows = table.rows.slice(numHeader);
@@ -11,7 +17,7 @@ const regularRows = table.rows.slice(numHeader);
             <thead>
                 { headerRows.map(row => (
                         <tr>
-                            { row.cells.map(cell => (
+                            { row.cells?.map(cell => (
                                 <th>{ cell }</th>
                             )) }
                         </tr>
@@ -23,7 +29,7 @@ const regularRows = table.rows.slice(numHeader);
             <tbody>
                 { regularRows.map(row => (
                         <tr>
-                            { row.cells.map(cell => (
+                            { row.cells?.map(cell => (
                                 <td>{ cell }</td>
                             )) }
                         </tr>

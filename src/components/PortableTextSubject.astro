@@ -1,8 +1,15 @@
 ---
 import { sanityClient } from "sanity:client";
 import groq from "groq";
+import type { Post } from '../groq';
+import type { PortableTextMarkDefinition } from "@portabletext/types";
 
-const { markDef } = Astro.props.node;
+type Block = Extract<Post['content'][number], { '_type': 'block' }>;
+interface NodeProps extends PortableTextMarkDefinition {
+    markDef: Extract<NonNullable<Block['markDefs']>[number], { '_type': 'subject' }>;
+}
+
+const { markDef } : NodeProps = Astro.props.node;
 const { subject: subjectReference } = markDef;
 
 const subjectReferenceQuery = groq`

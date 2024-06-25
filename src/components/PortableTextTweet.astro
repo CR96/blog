@@ -1,8 +1,11 @@
 ---
 import { Tweet } from 'react-tweet';
 import CaptionedElement from './CaptionedElement.astro';
+import type { Post } from '../groq';
 
-const { id, caption } = Astro.props.node;
+type NodeProps = Extract<Post['content'][number], { '_type': 'tweet' }>;
+
+const { id, caption } : NodeProps = Astro.props.node;
 
 const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
