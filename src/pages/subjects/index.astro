@@ -1,0 +1,33 @@
+---
+import { sanityClient } from "sanity:client";
+import groq from "groq";
+import type { Subject } from "../../groq";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const subjectIndexQuery = groq`
+    *[_type == "subject"] | order(name)
+`;
+
+const subjects = await sanityClient.fetch<Subject[]>(subjectIndexQuery);
+
+const groupedSubjects = Object.groupBy(subjects, subject => {
+    return subject.name.toUpperCase().charAt(0);
+});
+const letterHeadings = Object.keys(groupedSubjects);
+---
+
+<BaseLayout title="Subjects">
+    <h1>Subjects</h1>
+    { letterHeadings.map(letter => (
+        <h2>{ letter }</h2>
+        <ul>
+            { groupedSubjects[letter]?.map(subject => (
+                <li>
+                    <a href={ `/subjects/${subject.slug.current}` }>
+                        { subject.name }
+                    </a>
+                </li>
+            )) }
+        </ul>
+    )) }
+</BaseLayout>

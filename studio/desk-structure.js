@@ -1,5 +1,5 @@
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
-import { BlockContentIcon, FolderIcon } from '@sanity/icons';
+import { BlockContentIcon, FolderIcon, BookIcon } from '@sanity/icons';
 
 export default (S, context) => {
     return S.list()
@@ -22,6 +22,14 @@ export default (S, context) => {
                 title: 'Topics',
                 type: 'topic',
                 icon: FolderIcon
-            })
+            }),
+            S.listItem('subject')
+                .title('Subjects')
+                .icon(BookIcon)
+                .child(
+                    S.documentList('subject')
+                        .title('Subjects')
+                        .filter('_type == "subject"')
+                )
         ]);
 };

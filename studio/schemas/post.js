@@ -1,7 +1,7 @@
 import block from '../fields/block';
 import alt from '../fields/alt';
 import caption from '../fields/caption';
-import { ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
+import { BookIcon, ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
 
 export default {
   name: "post",
@@ -60,7 +60,42 @@ export default {
       title: "Content",
       type: "array",
       of: [
-        block,
+        {
+          ...block,
+          marks: {
+            annotations: [
+              {
+                name: "link",
+                title: "Link",
+                type: "object",
+                fields: [
+                  {
+                    name: "href",
+                    title: "Link",
+                    description: "A valid web, email, phone, or relative link.",
+                    type: "url"
+                  }
+                ]
+              },
+              {
+                name: "subject",
+                title: "Subject",
+                type: "object",
+                icon: BookIcon,
+                fields: [
+                  {
+                    name: "subject",
+                    title: "Subject",
+                    type: "reference",
+                    to: [
+                      { type: "subject" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
         {
           name: "image",
           title: "Image",

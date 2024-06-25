@@ -1,0 +1,19 @@
+---
+import { sanityClient } from "sanity:client";
+import groq from "groq";
+
+const { markDef } = Astro.props.node;
+const { subject: subjectReference } = markDef;
+
+const subjectReferenceQuery = groq`
+    *[_type == "subject" && _id == $id][0]
+`;
+
+const subject = await sanityClient.fetch(subjectReferenceQuery, {
+    id: subjectReference._ref
+});
+---
+
+<a href={ `/subjects/${subject.slug.current}` }>
+    <slot />
+</a>

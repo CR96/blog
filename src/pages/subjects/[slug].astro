@@ -1,0 +1,52 @@
+---
+import { sanityClient } from "sanity:client";
+import groq from "groq";
+import type { Subject, Post } from '../../groq';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PortableText from "../../components/PortableText.astro";
+import { generateDatedPostSlug } from "../../util";
+
+export async function getStaticPaths() {
+    const subjectPageQuery = groq`
+        *[_type == "subject"]{
+            ...,
+            "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
+        }
+    `;
+
+    const subjects = await sanityClient.fetch<SubjectPageQueryResult[]>(subjectPageQuery);
+
+    return subjects.map(subject => ({
+        params: { slug: subject.slug.current },
+        props: subject
+    }));
+};
+
+interface SubjectPageQueryResult extends Subject {
+    posts: Post[]
+}
+type Props = SubjectPageQueryResult;
+const subject = Astro.props;
+---
+
+<BaseLayout title={ subject.name }>
+    <h1>{ subject.name }</h1>
+    { subject?.content && (
+        <PortableText value={ subject.content } />
+    ) }
+    
+    <h2>References</h2>
+    <ul>
+        { subject.posts.map(post => {
+            const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
+            
+            return (
+                <li>
+                    <a href={ `/${datedSlug}` }>
+                        { post.title }
+                    </a>
+                </li>
+            );
+        }) }
+    </ul>
+</BaseLayout>
