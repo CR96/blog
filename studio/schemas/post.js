@@ -62,6 +62,10 @@ export default {
       of: [
         {
           ...block,
+          styles: [
+            ...block.styles,
+            { title: 'Opinion', value: 'opinion' }
+          ],
           marks: {
             annotations: [
               {

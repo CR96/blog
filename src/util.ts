@@ -1,6 +1,7 @@
 import { sanityClient } from "sanity:client";
 import groq from "groq";
 import type { SanityReference } from "@sanity/client";
+import { randomUUID } from 'crypto';
 
 export const generateDatedPostSlug = (datePublished: string, baseSlug: string) => {
     const date = new Date(datePublished);
@@ -13,4 +14,9 @@ export const resolveSanityRef = <T>(ref: SanityReference) => {
         *[_id == $id][0]
     `;
     return sanityClient.fetch<T>(resolveRefQuery, { id: ref._ref });
+};
+
+export const uniqueId = (prefix: string) => {
+    const uuid = randomUUID().slice(0, 5);
+    return `${prefix}-${uuid}`;
 };

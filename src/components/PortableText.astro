@@ -6,12 +6,16 @@ import PortableTextTweet from './PortableTextTweet.astro';
 import PortableTextVideo from './PortableTextVideo.astro';
 import PortableTextSubject from './PortableTextSubject.astro';
 import PortableTextTable from './PortableTextTable.astro';
+import PortableTextOpinion from './PortableTextOpinion.astro';
 
 type Props = PortableTextProps;
 
 const { value } = Astro.props;
 
 const components = {
+  block: {
+    opinion: PortableTextOpinion
+  },
   type: {
     image: PortableTextImage,
     tweet: PortableTextTweet,
