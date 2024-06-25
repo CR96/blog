@@ -73,7 +73,8 @@ export default {
                     name: "href",
                     title: "Link",
                     description: "A valid web, email, phone, or relative link.",
-                    type: "url"
+                    type: "url",
+                    validation: rule => rule.required()
                   }
                 ]
               },
@@ -89,7 +90,8 @@ export default {
                     type: "reference",
                     to: [
                       { type: "subject" }
-                    ]
+                    ],
+                    validation: rule => rule.required()
                   }
                 ]
               }
