@@ -12,17 +12,7 @@ export async function getStaticPaths() {
 	const postPageQuery = groq`
 		*[_type == "post"]{
 			...,
-			topic->,
-			content[] {
-				...,
-				_type == "video" => {
-					...,
-					video {
-						...,
-						asset->
-					}
-				}
-			}
+			topic->
 		}
 	`;
     const posts = await sanityClient.fetch<PostPageQueryResult[]>(postPageQuery);

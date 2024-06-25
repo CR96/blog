@@ -3,7 +3,15 @@ import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
 
-const { asset, alt = "", caption } = Astro.props.node;
+const { asset: assetReference, alt = "", caption } = Astro.props.node;
+
+const assetReferenceQuery = groq`
+    *[_type == "sanity.imageAsset" && _id == $id][0]
+`;
+
+const asset = await sanityClient.fetch<SanityImageAsset>(assetReferenceQuery, {
+    id: assetReference?._ref
+});
 
 const builder = imageUrlBuilder(sanityClient);
 const src = builder.image(asset).format('webp').url();

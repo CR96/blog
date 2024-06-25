@@ -1,13 +1,24 @@
 ---
+import { sanityClient } from "sanity:client";
+import groq from "groq";
 import CaptionedElement from "./CaptionedElement.astro";
 
 const { video, caption } = Astro.props.node;
+const { asset: assetReference } = video;
+
+const assetReferenceQuery = groq`
+    *[_type == "mux.videoAsset" && _id == $id][0]
+`;
+
+const asset = await sanityClient.fetch(assetReferenceQuery, {
+    id: assetReference._ref
+});
 
 const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
 <WrapperElement { ...caption && { caption } }>
-    <mux-player playback-id={ video.asset.playbackId } />
+    <mux-player playback-id={ asset.playbackId } />
 </WrapperElement>
 <script>
     import '@mux/mux-player';
