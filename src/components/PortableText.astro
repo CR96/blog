@@ -4,6 +4,7 @@ import PortableTextImage from "./PortableTextImage.astro";
 import PortableTextTweet from './PortableTextTweet.astro';
 import PortableTextVideo from './PortableTextVideo.astro';
 import PortableTextSubject from './PortableTextSubject.astro';
+import PortableTextTable from './PortableTextTable.astro';
 
 const { value } = Astro.props;
 
@@ -11,7 +12,8 @@ const components = {
   type: {
     image: PortableTextImage,
     tweet: PortableTextTweet,
-    video: PortableTextVideo
+    video: PortableTextVideo,
+    table: PortableTextTable
   },
   mark: {
     subject: PortableTextSubject

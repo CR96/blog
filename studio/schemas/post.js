@@ -1,7 +1,7 @@
 import block from '../fields/block';
 import alt from '../fields/alt';
 import caption from '../fields/caption';
-import { BookIcon, ImageIcon, PresentationIcon, TwitterIcon } from "@sanity/icons";
+import { BookIcon, ImageIcon, PresentationIcon, ThListIcon, TwitterIcon } from "@sanity/icons";
 
 export default {
   name: "post",
@@ -135,6 +135,28 @@ export default {
             caption
           ],
           icon: TwitterIcon,
+        },
+        {
+          name: "table",
+          title: "Table",
+          type: "object",
+          fields: [
+            {
+              name: "table",
+              title: "Table Body",
+              type: "table",
+              validation: rule => rule.required()
+            },
+            {
+              name: "numHeader",
+              title: "Table Header",
+              description: "Number of rows that represent the table header",
+              type: "number",
+              initialValue: 0,
+              validation: rule => rule.required().min(0)
+            }
+          ],
+          icon: ThListIcon
         }
       ],
       validation: rule => rule.required()
