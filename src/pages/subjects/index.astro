@@ -10,9 +10,16 @@ const subjectIndexQuery = groq`
 
 const subjects = await sanityClient.fetch<Subject[]>(subjectIndexQuery);
 
-const groupedSubjects = Object.groupBy(subjects, subject => {
-    return subject.name.toUpperCase().charAt(0);
-});
+interface GroupedSubjects {
+    [key: string]: Subject[];
+}
+
+const groupedSubjects = subjects.reduce((accumulator : GroupedSubjects, current) => {
+    const letter = current.name.toUpperCase().charAt(0);
+    accumulator[letter] ??= [];
+    accumulator[letter].push(current);
+    return accumulator;
+}, {});
 const letterHeadings = Object.keys(groupedSubjects);
 ---
 

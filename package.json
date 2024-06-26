@@ -9,9 +9,6 @@
     "check": "astro check",
     "types": "sanity schema extract --enforce-required-fields --path ./studio/typed-schema.json && sanity typegen generate"
   },
-  "engine": {
-    "node": ">= 22.0.0"
-  },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/mdx": "^3.1.1",
