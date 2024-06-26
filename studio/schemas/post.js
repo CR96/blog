@@ -52,7 +52,8 @@ export default {
       title: "Thumbnail",
       type: "image",
       fields: [
-        alt
+        alt,
+        caption
       ]
     },
     {
