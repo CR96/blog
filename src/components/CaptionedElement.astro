@@ -1,19 +1,24 @@
 ---
 import PortableText from './PortableText.astro';
+import type { PortableTextProps } from 'astro-portabletext/types';
 
 interface Props {
-    caption: string
+    caption?: PortableTextProps['value']
 };
 
 const { caption } = Astro.props;
 ---
 
-<figure>
+{ caption ? (
+    <figure>
+        <slot />
+        <figcaption>
+            <PortableText value={ caption } />
+        </figcaption>
+    </figure>
+) : (
     <slot />
-    <figcaption>
-        <PortableText value={ caption } />
-    </figcaption>
-</figure>
+) }
 <style>
     figcaption {
         color: light-dark(var(--zinc-600), var(--zinc-400));

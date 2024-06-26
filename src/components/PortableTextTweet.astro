@@ -7,13 +7,11 @@ import type { Post } from '../groq';
 type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'tweet' }>>;
 
 const { id, caption } = Astro.props.node;
-
-const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
-<WrapperElement { ...caption && { caption } }>
+<CaptionedElement caption={ caption }>
     <Tweet id={ id } client:load />
-</WrapperElement>
+</CaptionedElement>
 <style is:global>
     .react-tweet-theme {
         max-width: none;

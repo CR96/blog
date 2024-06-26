@@ -11,13 +11,11 @@ const { asset: assetRef } = video;
 
 if (!assetRef) { return; }
 const asset = await resolveSanityRef<MuxVideoAsset>(assetRef);
-
-const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
-<WrapperElement { ...caption && { caption } }>
+<CaptionedElement caption={ caption }>
     <mux-player playback-id={ asset.playbackId } />
-</WrapperElement>
+</CaptionedElement>
 <script>
     import '@mux/mux-player';
 </script>

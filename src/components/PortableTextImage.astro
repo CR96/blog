@@ -15,10 +15,8 @@ const asset = await resolveSanityRef<SanityImageAsset>(assetRef);
 
 const builder = imageUrlBuilder(sanityClient);
 const src = builder.image(asset).format('webp').url();
-
-const WrapperElement = caption ? CaptionedElement : Fragment;
 ---
 
-<WrapperElement { ...caption && { caption } }>
+<CaptionedElement caption={ caption }>
     <img src={ src } alt={ alt } />
-</WrapperElement>
+</CaptionedElement>
