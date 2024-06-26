@@ -79,7 +79,9 @@ export default {
                     title: "Link",
                     description: "A valid web, email, phone, or relative link.",
                     type: "url",
-                    validation: rule => rule.required()
+                    validation: rule => rule.uri({
+                      allowRelative: true
+                    }).required()
                   }
                 ]
               },
