@@ -1,8 +1,12 @@
 ---
 import type { Props as PortableTextProps, Block } from "astro-portabletext/types";
 import { uniqueId } from '../util';
+import type { Post } from "../groq";
+import PortableText from "./PortableText.astro";
 
-type Props = PortableTextProps<Block>;
+type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'opinion' }>>;
+
+const { content } = Astro.props.node;
 
 const headerId = uniqueId("opinion-header");
 ---
@@ -15,7 +19,7 @@ const headerId = uniqueId("opinion-header");
     <div class="opinion-header" id={ headerId }>
         My thoughts
     </div>
-    <slot />
+    <PortableText value={ content } />
 </div>
 <style>
     .opinion-container {
