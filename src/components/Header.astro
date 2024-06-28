@@ -5,6 +5,7 @@ import { sanityClient } from 'sanity:client';
 import groq from 'groq';
 import type { Topic } from '../groq';
 import NavigationLink from './NavigationLink.astro';
+import { SITE_TITLE } from '../consts';
 
 const headerQuery = groq`
 	*[_type == "topic"] | order(orderRank)
@@ -12,7 +13,6 @@ const headerQuery = groq`
 const topics = await sanityClient.fetch<Topic[]>(headerQuery);
 
 const links = [
-	{ label: "Home", href: "/" },
 	{ label: "Calendar", href: "/calendar" },
 	{
 		label: "Blog",
@@ -27,7 +27,7 @@ const links = [
 <SkipLink />
 <header>
 	<nav>
-		<NavigationLink href="/">🚌</NavigationLink>
+		<NavigationLink href="/" class="nav-logo">{ SITE_TITLE }</NavigationLink>
 		<NavigationLevel links={ links } />
 	</nav>
 </header>
@@ -47,5 +47,10 @@ const links = [
 		justify-content: space-between;
 		margin-inline: auto;
 		max-width: 760px;
+	}
+
+	.nav-logo {
+		font-weight: 700;
+		color: light-dark(var(--zinc-900), var(--zinc-100));
 	}
 </style>
