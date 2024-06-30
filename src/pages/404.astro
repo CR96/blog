@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import banner from "../images/shelter-404.png";
+---
+
+<BaseLayout title="404">
+    <Image src={ banner } alt="Bus shelter with a tumbleweed passing by" />
+    <div class="error-container">
+        <h1>404</h1>
+        <p>Bus not found. Go <a href="/">home</a> or <a href="/topics/adventures">read an article</a> while you wait.</p>
+    </div>
+</BaseLayout>
+<style>
+    .error-container {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 5rem;
+        font-weight: 900;
+        margin-block: 0;
+    }
+
+    p {
+        margin-top: 0.5rem;
+    }
+</style>
