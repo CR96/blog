@@ -18,6 +18,7 @@ export default defineConfig({
     sanity({
       projectId: '06loossa',
       dataset: 'production',
+      apiVersion: 'v2022-06-30',
       useCdn: false,
       studioBasePath: '/admin'
     }),
