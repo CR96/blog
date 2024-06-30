@@ -12,8 +12,8 @@ import groq from "groq";
 export default defineConfig({
   name: "blog",
   title: "Blog",
-  projectId: '06loossa',
-  dataset: 'production',
+  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
+  dataset: import.meta.env.PUBLIC_SANITY_DATASET,
   plugins: [
     structureTool({ structure: deskStructure }),
     visionTool(),
