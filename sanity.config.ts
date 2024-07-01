@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { webhooksTrigger } from 'sanity-plugin-webhooks-trigger';
 import { muxInput } from "sanity-plugin-mux-input";
 import { table } from "@sanity/table";
 import schemas from "./studio/schemas/schema";
@@ -15,6 +16,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure: deskStructure }),
     visionTool(),
+    webhooksTrigger(),
     muxInput(),
     table()
   ],
