@@ -35,6 +35,7 @@ const post = Astro.props;
 	title={ post.title }
 	description={ post?.description }
 >
+	<slot />
 	<h1>{ post.title }</h1>
 	<p class="post-metadata">
 		<FormattedDate date={ new Date(post.datePublished) } />
