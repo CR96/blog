@@ -2,6 +2,9 @@ import { useClient, useCurrentUser } from 'sanity';
 import type { DocumentActionDescription, DocumentActionProps } from 'sanity';
 import { createPreviewSecret } from '@sanity/preview-url-secret/create-secret';
 import { EyeOpenIcon } from '@sanity/icons';
+import { generateDatedPostSlug } from '../../src/util';
+import type { Post } from '../../src/groq';
+import groq from 'groq';
 
 export const PreviewAction = (props: DocumentActionProps) => {
     const { id, type, draft } = props;
@@ -10,15 +13,26 @@ export const PreviewAction = (props: DocumentActionProps) => {
     const currentUser = useCurrentUser();
 
     const onHandle = async () => {
-        const { secret } = await createPreviewSecret(
+        const { secret: token } = await createPreviewSecret(
             client, 'previewAction', location.href, currentUser?.id
         );
 
-        const params = new URLSearchParams();
-        params.append('id', id);
-        params.append('secret', secret);
+        const postPreviewQuery = groq`
+            *[_type == "post" && _id == $id][0]
+        `;
+        const post = await client.fetch<Post>(postPreviewQuery, {
+            id: draft?._id
+        });
+        if (!post) {
+            alert("Error opening preview: Post not found"); return;
+        }
 
-        window.open(`/api/preview?${params}`, '_blank');
+        const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
+
+        const params = new URLSearchParams();
+        params.append('token', token);
+
+        window.open(`/${datedSlug}/preview?${params}`, '_blank');
     };
 
     const disabled = type != "post" ||

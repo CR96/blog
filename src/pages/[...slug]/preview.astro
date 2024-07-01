@@ -21,14 +21,14 @@ const previewPostPageQuery = groq`
     }[0]
 `;
 
-const secret = Astro.cookies.get('previewSecret')?.value;
-if (!secret) {
+const token = Astro.url.searchParams.get('token');
+if (!token) {
     return new Response("HTTP 400", { status: 400 });
 }
 
 const { isValid } = await validatePreviewUrl(
     sanityClient,
-    fakeSanityPreviewUrl(Astro.url.origin, secret)
+    fakeSanityPreviewUrl(Astro.url.origin, token)
 );
 if (!isValid) {
     return new Response("HTTP 401", { status: 401 });

@@ -1,5 +1,9 @@
+---
+const publicUrl = Astro.url.pathname.replace('/preview', '');
+---
+
 <div class="preview-overlay">
-    <span>You're viewing this page in preview mode. <a href="/api/preview?disable">Disable preview mode.</a></span>
+    <span>You're viewing this page in preview mode. <a href={ publicUrl }>Switch to public version.</a></span>
 </div>
 <style>
     .preview-overlay {
