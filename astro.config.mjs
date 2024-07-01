@@ -28,7 +28,8 @@ export default defineConfig({
       token: SANITY_API_TOKEN,
       apiVersion: 'v2022-06-30',
       useCdn: false,
-      studioBasePath: '/admin'
+      studioBasePath: '/admin',
+      perspective: 'published'
     }),
     react()
   ],
