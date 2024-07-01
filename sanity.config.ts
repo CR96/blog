@@ -1,8 +1,8 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-import { webhooksTrigger } from 'sanity-plugin-webhooks-trigger';
 import { muxInput } from "sanity-plugin-mux-input";
+import { webhooksTrigger } from 'sanity-plugin-webhooks-trigger';
 import { table } from "@sanity/table";
 import schemas from "./studio/schemas/schema";
 import deskStructure from "./studio/desk-structure";
@@ -14,10 +14,13 @@ export default defineConfig({
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
   dataset: import.meta.env.PUBLIC_SANITY_DATASET,
   plugins: [
-    structureTool({ structure: deskStructure }),
+    structureTool({
+      title: 'Content',
+      structure: deskStructure
+    }),
+    muxInput(),
     visionTool(),
     webhooksTrigger(),
-    muxInput(),
     table()
   ],
   schema: {
@@ -27,6 +30,12 @@ export default defineConfig({
     actions: [
       PreviewAction
     ]
+  },
+  tasks: {
+    enabled: false
+  },
+  scheduledPublishing: {
+    enabled: false
   },
   basePath: "/admin"
 });
