@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 	const topicPageQuery = groq`
 		*[_type == "topic"]{
             ...,
-            "posts": *[_type == "post" && references(^._id)]
+            "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
         }
 	`;
     const topics = await sanityClient.fetch<TopicPageQueryResult[]>(topicPageQuery);
