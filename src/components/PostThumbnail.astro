@@ -1,5 +1,6 @@
 ---
 import type { Post } from '../groq';
+import { Picture } from 'astro:assets';
 import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
 
@@ -12,10 +13,22 @@ const { thumbnail } = Astro.props;
 if (!thumbnail) { return; }
 
 const builder = imageUrlBuilder(sanityClient);
-const thumbnailSrc = thumbnail && builder.image(thumbnail).format('webp').url();
+const thumbnailSrc = thumbnail && builder.image(thumbnail).url();
 ---
 
-<img src={ thumbnailSrc } alt={ thumbnail.alt } />
+<Picture
+    src={ thumbnailSrc }
+    alt={ thumbnail.alt ?? '' }
+    formats={[ 'avif', 'jpeg' ]}
+    fallbackFormat='jpeg'
+    widths={[ 540, 1080, 1520 ]}
+    sizes={`
+        (max-width: 540px) 540px,
+        (max-width: 1080px) 1080px,
+        1520px
+    `}
+    inferSize
+/>
 <style>
     img {
         width: 100%;

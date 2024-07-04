@@ -4,6 +4,7 @@ import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
 import type { Post, SanityImageAsset } from '../groq';
+import { Picture } from 'astro:assets';
 import { resolveSanityRef } from '../util';
 
 type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'image' }>>;
@@ -14,9 +15,25 @@ if (!assetRef) { return; }
 const asset = await resolveSanityRef<SanityImageAsset>(assetRef);
 
 const builder = imageUrlBuilder(sanityClient);
-const src = builder.image(asset).format('webp').url();
+const src = builder.image(asset).url();
 ---
 
 <CaptionedElement caption={ caption }>
-    <img src={ src } alt={ alt } />
+    <Picture
+        src={ src }
+        alt={ alt }
+        formats={[ 'avif', 'jpeg' ]}
+        fallbackFormat='jpeg'
+        widths={[ 760, 1520 ]}
+        sizes={`
+            (max-width: 760px) 760px,
+            1520px
+        `}
+        inferSize
+    />
 </CaptionedElement>
+<style>
+    img {
+        width: 100%;
+    }
+</style>

@@ -5,7 +5,11 @@ import banner from "../images/shelter-404.png";
 ---
 
 <BaseLayout title="404">
-    <Image src={ banner } alt="Bus shelter with a tumbleweed passing by" />
+    <Image
+        src={ banner }
+        alt="Bus shelter with a tumbleweed passing by"
+        loading="eager"
+    />
     <div class="error-container">
         <h1>404</h1>
         <p>Bus not found. Go <a href="/">home</a> or <a href="/topics/adventures">read an article</a> while you wait.</p>

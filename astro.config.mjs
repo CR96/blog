@@ -33,6 +33,11 @@ export default defineConfig({
     }),
     react()
   ],
+  image: {
+    domains: [
+      'cdn.sanity.io'
+    ]
+  },
   vite: {
     css: {
       transformer: 'lightningcss'
