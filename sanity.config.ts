@@ -18,7 +18,9 @@ export default defineConfig({
       title: 'Content',
       structure: deskStructure
     }),
-    muxInput(),
+    muxInput({
+      max_resolution_tier: '2160p'
+    }),
     visionTool(),
     webhooksTrigger(),
     table()
