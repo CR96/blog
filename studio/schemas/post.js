@@ -2,6 +2,7 @@ import alt from '../fields/alt';
 import caption from '../fields/caption';
 import content from '../fields/content';
 import { BulbOutlineIcon } from '@sanity/icons';
+import { toPlainText } from 'astro-portabletext/utils';
 
 export default {
   name: "post",
@@ -68,6 +69,17 @@ export default {
             content
           ],
           icon: BulbOutlineIcon,
+          preview: {
+            select: {
+              content: "content"
+            },
+            prepare: ({ content }) => {
+              return {
+                title: "Opinion",
+                subtitle: content ? toPlainText(content) : false
+              };
+            }
+          }
         }
       ]
     }

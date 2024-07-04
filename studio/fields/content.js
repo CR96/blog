@@ -56,7 +56,18 @@ export default {
         alt,
         caption
       ],
-      icon: ImageIcon
+      icon: ImageIcon,
+      preview: {
+        select: {
+          alt: 'alt'
+        },
+        prepare: ({ alt }) => {
+          return {
+            title: 'Image',
+            subtitle: alt
+          };
+        }
+      }
     },
     {
       name: 'video',
@@ -71,7 +82,18 @@ export default {
           validation: rule => rule.required()
         },
         caption
-      ]
+      ],
+      preview: {
+        select: {
+          assetId: 'video.asset.assetId'
+        },
+        prepare: ({ assetId }) => {
+          return {
+            title: 'Video',
+            subtitle: assetId ? `Asset #${ assetId }` : false
+          };
+        }
+      }
     },
     {
       name: "tweet",
@@ -87,6 +109,17 @@ export default {
         caption
       ],
       icon: TwitterIcon,
+      preview: {
+        select: {
+          id: "id"
+        },
+        prepare: ({ id }) => {
+          return {
+            title: "Tweet",
+            subtitle: id
+          };
+        }
+      }
     },
     {
       name: "table",
@@ -108,7 +141,23 @@ export default {
           validation: rule => rule.required().min(0)
         }
       ],
-      icon: ThListIcon
+      icon: ThListIcon,
+      preview: {
+        select: {
+          table: "table"
+        },
+        prepare: ({ table }) => {
+          const rows = table?.rows.length ?? 0;
+          const columns = table?.rows[0]?.cells.length ?? 0;
+          const rowsPlural = rows === 1 ? "row" : "rows";
+          const columnsPlural = rows === 1 ? "column" : "columns";
+
+          return {
+            title: "Table",
+            subtitle: `${rows} ${rowsPlural}, ${columns} ${columnsPlural}`
+          };
+        }
+      }
     }
   ],
   validation: rule => rule.required()
