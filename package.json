@@ -7,7 +7,8 @@
     "build": "astro build",
     "dev": "astro dev",
     "check": "astro check",
-    "types": "sanity schema extract --enforce-required-fields --path ./studio/typed-schema.json && sanity typegen generate"
+    "types": "sanity schema extract --enforce-required-fields --path ./studio/typed-schema.json && sanity typegen generate",
+    "format": "eslint --fix ."
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -41,5 +42,10 @@
     "sanity-plugin-mux-input": "^2.3.6",
     "sanity-plugin-webhooks-trigger": "^0.2.4",
     "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "eslint-plugin-astro": "^1.2.2"
   }
 }
