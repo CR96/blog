@@ -26,7 +26,7 @@ export default defineConfig({
       projectId: PUBLIC_SANITY_PROJECT_ID,
       dataset: PUBLIC_SANITY_DATASET,
       token: SANITY_API_TOKEN,
-      apiVersion: 'v2022-06-30',
+      apiVersion: 'v2022-03-07',
       useCdn: false,
       studioBasePath: '/admin',
       perspective: 'published'

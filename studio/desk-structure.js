@@ -11,6 +11,7 @@ export default (S, context) => {
                 .child(
                     S.documentList('post')
                         .title('Posts')
+                        .apiVersion('v2022-03-07')
                         .filter('_type == "post"')
                         .defaultOrdering([{
                             field: 'datePublished',
@@ -29,6 +30,7 @@ export default (S, context) => {
                 .child(
                     S.documentList('subject')
                         .title('Subjects')
+                        .apiVersion('v2022-03-07')
                         .filter('_type == "subject"')
                 )
         ]);

@@ -13,6 +13,7 @@ export default defineConfig({
   title: "Blog",
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
   dataset: import.meta.env.PUBLIC_SANITY_DATASET,
+  apiVersion: 'v2022-03-07',
   plugins: [
     structureTool({
       title: 'Content',
@@ -38,6 +39,5 @@ export default defineConfig({
   },
   scheduledPublishing: {
     enabled: false
-  },
-  basePath: "/admin"
+  }
 });

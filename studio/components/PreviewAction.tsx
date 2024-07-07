@@ -9,7 +9,7 @@ import groq from 'groq';
 export const PreviewAction = (props: DocumentActionProps) => {
     const { id, type, draft } = props;
 
-    const client = useClient();
+    const client = useClient({ apiVersion: 'v2022-03-07' });
     const currentUser = useCurrentUser();
 
     const onHandle = async () => {
