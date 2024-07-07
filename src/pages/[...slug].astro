@@ -10,10 +10,43 @@ import PostThumbnail from "../components/PostThumbnail.astro";
 import CaptionedElement from "../components/CaptionedElement.astro";
 
 export async function getStaticPaths() {
+    const contentBlockSubquery = groq`
+        _type == "image" => {
+            ...,
+            asset->
+        },
+        _type == "video" => {
+            ...,
+            video {
+                ...,
+                asset->
+            }
+        },
+        markDefs[] {
+            ...,
+            _type == "subject" => {
+                ...,
+                subject->
+            }
+        }
+    `;
+
     const postPageQuery = groq`
 		*[_type == "post"]{
 			...,
-			topic->
+            content[] {
+				...,
+				${ contentBlockSubquery },
+                _type == "opinion" => {
+                    ...,
+                    ${ contentBlockSubquery }
+                }
+			},
+			topic->,
+            thumbnail {
+                ...,
+                asset->
+            }
 		}
 	`;
     const posts = await sanityClient.fetch<PostPageQueryResult[]>(postPageQuery);

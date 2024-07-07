@@ -5,14 +5,10 @@ import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
 import type { Post, SanityImageAsset } from '../groq';
 import { Picture } from 'astro:assets';
-import { resolveSanityRef } from '../util';
 
 type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'image' }>>;
 
-const { asset: assetRef, alt = "", caption } = Astro.props.node;
-
-if (!assetRef) { return; }
-const asset = await resolveSanityRef<SanityImageAsset>(assetRef);
+const { asset, alt = "", caption } = Astro.props.node;
 
 const builder = imageUrlBuilder(sanityClient);
 const src = builder.image(asset).url();

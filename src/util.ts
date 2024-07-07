@@ -9,13 +9,6 @@ export const generateDatedPostSlug = (datePublished: string, baseSlug: string) =
     return `${dateFormatted}/${baseSlug}`;
 };
 
-export const resolveSanityRef = <T>(ref: SanityReference) => {
-    const resolveRefQuery = groq`
-        *[_id == $id][0]
-    `;
-    return sanityClient.fetch<T>(resolveRefQuery, { id: ref._ref });
-};
-
 export const fakeSanityPreviewUrl = (origin: string, secret: string) => {
     const searchParams = new URLSearchParams();
     searchParams.append(urlSearchParamPreviewSecret, secret);

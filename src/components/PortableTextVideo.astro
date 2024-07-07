@@ -2,15 +2,11 @@
 import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import CaptionedElement from "./CaptionedElement.astro";
 import type { Post, MuxVideoAsset } from '../groq';
-import { resolveSanityRef } from '../util';
 
 type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'video' }>>;
 
 const { video, caption } = Astro.props.node;
-const { asset: assetRef } = video;
-
-if (!assetRef) { return; }
-const asset = await resolveSanityRef<MuxVideoAsset>(assetRef);
+const { asset } = video;
 ---
 
 <CaptionedElement caption={ caption }>
