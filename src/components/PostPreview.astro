@@ -1,11 +1,11 @@
 ---
-import type { Post } from '../groq';
+import type { TopicPageQueryResult } from '../../studio/sanity-typegen';
 import { generateDatedPostSlug } from "../util";
 import FormattedDate from './FormattedDate.astro';
 import PostThumbnail from './PostThumbnail.astro';
 
 interface Props {
-    post: Post
+    post: TopicPageQueryResult[number]['posts'][number]
 }
 
 const { post } = Astro.props;

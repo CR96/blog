@@ -1,9 +1,9 @@
 ---
 import PostPreview from "./PostPreview.astro";
-import type { Post } from "../groq";
+import type { TopicPageQueryResult } from "../../studio/sanity-typegen";
 
 interface Props {
-    posts: Post[]
+    posts: TopicPageQueryResult[number]['posts'];
 }
 
 const { posts } = Astro.props;

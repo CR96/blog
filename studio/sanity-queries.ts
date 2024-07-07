@@ -95,7 +95,13 @@ export const subjectIndexQuery = groq`
 export const topicPageQuery = groq`
     *[_type == "topic"]{
         ...,
-        "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
+        "posts": *[_type == "post" && references(^._id)]{
+            ...,
+            thumbnail {
+                ...,
+                asset->
+            }
+        } | order(datePublished desc)
     }
 `;
 
@@ -108,7 +114,13 @@ export const headerQuery = groq`
 `;
 
 export const featuredPostsQuery = groq`
-    *[_type == "post" && featured == true] | order(datePublished desc)
+    *[_type == "post" && featured == true]{
+        ...,
+        thumbnail {
+            ...,
+            asset->
+        }
+    } | order(datePublished desc)
 `;
 
 export const postPreviewQuery = groq`
