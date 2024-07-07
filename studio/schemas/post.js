@@ -2,7 +2,7 @@ import alt from '../fields/alt';
 import caption from '../fields/caption';
 import content from '../fields/content';
 import { BulbOutlineIcon } from '@sanity/icons';
-import { toPlainText } from 'astro-portabletext/utils';
+import { toPlainText } from '@portabletext/toolkit';
 
 export default {
     name: "post",
