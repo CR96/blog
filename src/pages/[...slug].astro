@@ -1,7 +1,7 @@
 ---
 import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { Post, Topic } from "../groq";
+import { postPageQuery } from "../../studio/sanity-queries";
+import type { PostPageQueryResult } from "../../studio/sanity-typegen";
 import { generateDatedPostSlug } from "../util";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PortableText from "../components/PortableText.astro";
@@ -10,46 +10,7 @@ import PostThumbnail from "../components/PostThumbnail.astro";
 import CaptionedElement from "../components/CaptionedElement.astro";
 
 export async function getStaticPaths() {
-    const contentBlockSubquery = groq`
-        _type == "image" => {
-            ...,
-            asset->
-        },
-        _type == "video" => {
-            ...,
-            video {
-                ...,
-                asset->
-            }
-        },
-        markDefs[] {
-            ...,
-            _type == "subject" => {
-                ...,
-                subject->
-            }
-        }
-    `;
-
-    const postPageQuery = groq`
-		*[_type == "post"]{
-			...,
-            content[] {
-				...,
-				${ contentBlockSubquery },
-                _type == "opinion" => {
-                    ...,
-                    ${ contentBlockSubquery }
-                }
-			},
-			topic->,
-            thumbnail {
-                ...,
-                asset->
-            }
-		}
-	`;
-    const posts = await sanityClient.fetch<PostPageQueryResult[]>(postPageQuery);
+    const posts = await sanityClient.fetch<PostPageQueryResult>(postPageQuery);
 
     return posts.map(post => ({
         params: { slug: generateDatedPostSlug(post.datePublished, post.slug.current) },
@@ -57,10 +18,7 @@ export async function getStaticPaths() {
     }));
 }
 
-interface PostPageQueryResult extends Omit<Post, 'topic'> {
-    topic: Topic
-};
-type Props = PostPageQueryResult;
+type Props = PostPageQueryResult[number];
 const post = Astro.props;
 ---
 

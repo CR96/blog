@@ -1,10 +1,9 @@
 ---
-import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import { Tweet } from 'react-tweet';
 import CaptionedElement from './CaptionedElement.astro';
-import type { Post } from '../groq';
+import type { DereferencedContentBlock } from '../../studio/sanity-queries';
 
-type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'tweet' }>>;
+type Props = DereferencedContentBlock<'tweet'>;
 
 const { id, caption } = Astro.props.node;
 ---

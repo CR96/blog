@@ -1,20 +1,13 @@
 ---
 import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { Subject, Post } from '../../groq';
+import { subjectPageQuery } from "../../../studio/sanity-queries";
+import type { SubjectPageQueryResult } from '../../../studio/sanity-typegen';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PortableText from "../../components/PortableText.astro";
 import { generateDatedPostSlug } from "../../util";
 
 export async function getStaticPaths() {
-    const subjectPageQuery = groq`
-        *[_type == "subject"]{
-            ...,
-            "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
-        }
-    `;
-
-    const subjects = await sanityClient.fetch<SubjectPageQueryResult[]>(subjectPageQuery);
+    const subjects = await sanityClient.fetch<SubjectPageQueryResult>(subjectPageQuery);
 
     return subjects.map(subject => ({
         params: { slug: subject.slug.current },
@@ -22,10 +15,7 @@ export async function getStaticPaths() {
     }));
 };
 
-interface SubjectPageQueryResult extends Subject {
-    posts: Post[]
-}
-type Props = SubjectPageQueryResult;
+type Props = SubjectPageQueryResult[number];
 const subject = Astro.props;
 ---
 

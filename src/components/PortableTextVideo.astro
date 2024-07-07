@@ -1,9 +1,8 @@
 ---
-import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import CaptionedElement from "./CaptionedElement.astro";
-import type { Post, MuxVideoAsset } from '../groq';
+import type { DereferencedContentBlock } from '../../studio/sanity-queries';
 
-type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'video' }>>;
+type Props = DereferencedContentBlock<'video'>;
 
 const { video, caption } = Astro.props.node;
 const { asset } = video;

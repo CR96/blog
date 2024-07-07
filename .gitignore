@@ -3,7 +3,7 @@ dist/
 # generated types
 .astro/
 studio/typed-schema.json
-src/groq.d.ts
+studio/sanity-typegen.ts
 
 # dependencies
 node_modules/

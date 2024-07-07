@@ -1,9 +1,7 @@
 ---
-import type { Props as PortableTextProps, Mark } from 'astro-portabletext/types';
-import type { Post, Subject } from '../groq';
+import type { DereferencedContentMark } from '../../studio/sanity-queries';
 
-type Block = Extract<Post['content'][number], { '_type': 'block' }>;
-type Props = PortableTextProps<Mark<Extract<NonNullable<Block['markDefs']>[number], { '_type': 'subject' }>>>;
+type Props = DereferencedContentMark<'subject'>;
 
 const { markDef } = Astro.props.node;
 const { subject } = markDef;

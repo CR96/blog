@@ -1,11 +1,11 @@
 ---
-import type { Post } from '../groq';
 import { Picture } from 'astro:assets';
 import { sanityClient } from 'sanity:client';
+import type { DereferencedPost } from '../../studio/sanity-queries';
 import imageUrlBuilder from '@sanity/image-url';
 
 interface Props {
-    thumbnail: Post["thumbnail"]
+    thumbnail: DereferencedPost['thumbnail']
 };
 
 const { thumbnail } = Astro.props;

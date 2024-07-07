@@ -1,10 +1,9 @@
 ---
-import type { Props as PortableTextProps, Block } from "astro-portabletext/types";
 import { uniqueId } from '../util';
-import type { Post } from "../groq";
+import type { DereferencedContentBlock } from "../../studio/sanity-queries";
 import PortableText from "./PortableText.astro";
 
-type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'opinion' }>>;
+type Props = DereferencedContentBlock<'opinion'>;
 
 const { content } = Astro.props.node;
 

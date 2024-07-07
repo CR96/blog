@@ -1,15 +1,12 @@
 import rss from '@astrojs/rss';
-import groq from 'groq';
 import { sanityClient } from "sanity:client";
 import type { APIRoute } from "astro";
-import type { RssFeedQueryResult } from '../groq';
+import { rssFeedQuery } from '../../studio/sanity-queries';
+import type { RssFeedQueryResult } from '../../studio/sanity-typegen';
 import { generateDatedPostSlug } from "../util";
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 export const GET: APIRoute = async (context) => {
-	const rssFeedQuery = groq`
-		*[_type == "post"]
-	`;
     const posts = await sanityClient.fetch<RssFeedQueryResult>(rssFeedQuery);
 
 	if (!context.site) {

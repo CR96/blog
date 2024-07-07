@@ -1,8 +1,7 @@
 ---
-import type { Props as PortableTextProps } from 'astro-portabletext/types';
-import type { Post } from '../groq';
+import type { DereferencedContentBlock } from '../../studio/sanity-queries';
 
-type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'table' }>>;
+type Props = DereferencedContentBlock<'table'>;
 
 const { table, numHeader } = Astro.props.node;
 

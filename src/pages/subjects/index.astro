@@ -1,17 +1,13 @@
 ---
 import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { Subject } from "../../groq";
+import { subjectIndexQuery } from "../../../studio/sanity-queries";
+import type { SubjectIndexQueryResult } from "../../../studio/sanity-typegen";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const subjectIndexQuery = groq`
-    *[_type == "subject"] | order(name)
-`;
-
-const subjects = await sanityClient.fetch<Subject[]>(subjectIndexQuery);
+const subjects = await sanityClient.fetch<SubjectIndexQueryResult>(subjectIndexQuery);
 
 interface GroupedSubjects {
-    [key: string]: Subject[];
+    [key: string]: SubjectIndexQueryResult;
 }
 
 const groupedSubjects = subjects.reduce((accumulator : GroupedSubjects, current) => {

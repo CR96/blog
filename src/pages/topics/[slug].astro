@@ -1,19 +1,13 @@
 ---
 import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { Topic, Post } from "../../groq";
+import { topicPageQuery } from "../../../studio/sanity-queries";
+import type { TopicPageQueryResult } from "../../../studio/sanity-typegen";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostGrid from "../../components/PostGrid.astro";
 import PortableText from "../../components/PortableText.astro";
 
 export async function getStaticPaths() {
-    const topicPageQuery = groq`
-		*[_type == "topic"]{
-            ...,
-            "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
-        }
-	`;
-    const topics = await sanityClient.fetch<TopicPageQueryResult[]>(topicPageQuery);
+    const topics = await sanityClient.fetch<TopicPageQueryResult>(topicPageQuery);
 
     return topics.map(topic => ({
         params: { slug: topic.slug.current },
@@ -21,10 +15,7 @@ export async function getStaticPaths() {
     }));
 }
 
-interface TopicPageQueryResult extends Topic {
-    posts: Post[]
-}
-type Props = TopicPageQueryResult;
+type Props = TopicPageQueryResult[number];
 const topic = Astro.props;
 ---
 

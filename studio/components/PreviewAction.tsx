@@ -3,8 +3,8 @@ import type { DocumentActionDescription, DocumentActionProps } from 'sanity';
 import { createPreviewSecret } from '@sanity/preview-url-secret/create-secret';
 import { EyeOpenIcon } from '@sanity/icons';
 import { generateDatedPostSlug } from '../../src/util';
-import type { Post } from '../../src/groq';
-import groq from 'groq';
+import { postPreviewQuery } from '../../studio/sanity-queries';
+import type { PostPreviewQueryResult } from '../../studio/sanity-typegen';
 
 export const PreviewAction = (props: DocumentActionProps) => {
     const { id, type, draft } = props;
@@ -17,10 +17,7 @@ export const PreviewAction = (props: DocumentActionProps) => {
             client, 'previewAction', location.href, currentUser?.id
         );
 
-        const postPreviewQuery = groq`
-            *[_type == "post" && _id == $id][0]
-        `;
-        const post = await client.fetch<Post>(postPreviewQuery, {
+        const post = await client.fetch<PostPreviewQueryResult>(postPreviewQuery, {
             id: draft?._id
         });
         if (!post) {

@@ -1,5 +1,5 @@
 {
-    "path": "./src/**/*.{ts,tsx,js,jsx}", 
+    "path": "./studio/sanity-queries.ts", 
     "schema": "./studio/typed-schema.json",
-    "generates": "./src/groq.d.ts" 
+    "generates": "./studio/sanity-typegen.ts" 
 }

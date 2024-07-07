@@ -2,24 +2,12 @@
 export const prerender =  false;
 
 import { sanityClient } from 'sanity:client';
-import groq from 'groq';
+import { previewPostPageQuery } from '../../../studio/sanity-queries';
+import type { PreviewPostPageQueryResult } from '../../../studio/sanity-typegen';
 import PostPage from '../[...slug].astro';
 import PreviewOverlay from '../../components/PreviewOverlay.astro';
-import type { InferGetStaticPropsType } from 'astro';
-import type { getStaticPaths } from '../[...slug].astro';
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { fakeSanityPreviewUrl } from '../../util';
-
-const previewPostPageQuery = groq`
-    *[
-        _type == "post" &&
-        datePublished == $datePublished &&
-        slug.current == $slug
-    ]{
-        ...,
-        topic->
-    }[0]
-`;
 
 const token = Astro.url.searchParams.get('token');
 if (!token) {
@@ -44,9 +32,7 @@ if (slugComponents?.length != 4) {
 const datePublished = slugComponents.slice(0, 3).join('-');
 const slugRoot = slugComponents.at(-1);
 
-type PostPageQueryResult = InferGetStaticPropsType<typeof getStaticPaths>;
-
-const post = await sanityClient.fetch<PostPageQueryResult>(previewPostPageQuery, {
+const post = await sanityClient.fetch<PreviewPostPageQueryResult>(previewPostPageQuery, {
     datePublished,
     slug: slugRoot
 }, {

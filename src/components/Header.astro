@@ -2,15 +2,12 @@
 import SkipLink from './SkipLink.astro';
 import NavigationLevel from './NavigationLevel.astro';
 import { sanityClient } from 'sanity:client';
-import groq from 'groq';
-import type { Topic } from '../groq';
+import { headerQuery } from '../../studio/sanity-queries';
+import type { HeaderQueryResult } from '../../studio/sanity-typegen';
 import NavigationLink from './NavigationLink.astro';
 import { SITE_TITLE } from '../consts';
 
-const headerQuery = groq`
-	*[_type == "topic"] | order(orderRank)
-`;
-const topics = await sanityClient.fetch<Topic[]>(headerQuery);
+const topics = await sanityClient.fetch<HeaderQueryResult>(headerQuery);
 
 const links = [
     { label: "Calendar", href: "/calendar" },

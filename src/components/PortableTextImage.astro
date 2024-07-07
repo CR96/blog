@@ -1,14 +1,15 @@
 ---
-import type { Props as PortableTextProps } from 'astro-portabletext/types';
 import { sanityClient } from 'sanity:client';
 import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
-import type { Post, SanityImageAsset } from '../groq';
+import type { DereferencedContentBlock } from '../../studio/sanity-queries';
 import { Picture } from 'astro:assets';
 
-type Props = PortableTextProps<Extract<Post['content'][number], { '_type': 'image' }>>;
+type Props = DereferencedContentBlock<'image'>;
 
 const { asset, alt = "", caption } = Astro.props.node;
+
+if (!asset) { return; }
 
 const builder = imageUrlBuilder(sanityClient);
 const src = builder.image(asset).url();
