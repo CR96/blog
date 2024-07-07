@@ -59,12 +59,14 @@ export default {
       icon: ImageIcon,
       preview: {
         select: {
-          alt: 'alt'
+          alt: 'alt',
+          asset: 'asset'
         },
-        prepare: ({ alt }) => {
+        prepare: ({ alt, asset }) => {
           return {
             title: 'Image',
-            subtitle: alt
+            subtitle: alt,
+            media: asset
           };
         }
       }
