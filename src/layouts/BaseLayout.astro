@@ -4,16 +4,16 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
-	title: string;
-	description?: string;
-	image?: string;
+    title: string;
+    description?: string;
+    image?: string;
 }
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead {...Astro.props} />
+        <BaseHead { ...Astro.props } />
     </head>
     <body>
         <Header />

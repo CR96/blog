@@ -10,7 +10,7 @@ import PostThumbnail from "../components/PostThumbnail.astro";
 import CaptionedElement from "../components/CaptionedElement.astro";
 
 export async function getStaticPaths() {
-	const postPageQuery = groq`
+    const postPageQuery = groq`
 		*[_type == "post"]{
 			...,
 			topic->
@@ -18,38 +18,38 @@ export async function getStaticPaths() {
 	`;
     const posts = await sanityClient.fetch<PostPageQueryResult[]>(postPageQuery);
 
-	return posts.map(post => ({
-		params: { slug: generateDatedPostSlug(post.datePublished, post.slug.current) },
-		props: post
-	}));
+    return posts.map(post => ({
+        params: { slug: generateDatedPostSlug(post.datePublished, post.slug.current) },
+        props: post
+    }));
 }
 
 interface PostPageQueryResult extends Omit<Post, 'topic'> {
-	topic: Topic
+    topic: Topic
 };
 type Props = PostPageQueryResult;
 const post = Astro.props;
 ---
 
 <BaseLayout
-	title={ post.title }
-	description={ post?.description }
+    title={ post.title }
+    description={ post?.description }
 >
-	<slot />
-	<h1>{ post.title }</h1>
-	<p class="post-metadata">
-		<FormattedDate date={ new Date(post.datePublished) } />
-		{` — `}
-		<a href=`/topics/${ post.topic.slug.current }`>
-			{ post.topic.name }
-		</a>
-	</p>
-	{ post?.thumbnail && (
-		<CaptionedElement caption={ post.thumbnail.caption }>
-			<PostThumbnail thumbnail={ post.thumbnail } />
-		</CaptionedElement>
-	) }
-	<PortableText value={post.content} />
+    <slot />
+    <h1>{ post.title }</h1>
+    <p class="post-metadata">
+        <FormattedDate date={ new Date(post.datePublished) } />
+        {` — `}
+        <a href=`/topics/${ post.topic.slug.current }`>
+            { post.topic.name }
+        </a>
+    </p>
+    { post?.thumbnail && (
+        <CaptionedElement caption={ post.thumbnail.caption }>
+            <PostThumbnail thumbnail={ post.thumbnail } />
+        </CaptionedElement>
+    ) }
+    <PortableText value={ post.content } />
 </BaseLayout>
 <style>
 	h1 {

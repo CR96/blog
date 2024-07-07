@@ -7,7 +7,7 @@ import PostGrid from "../../components/PostGrid.astro";
 import PortableText from "../../components/PortableText.astro";
 
 export async function getStaticPaths() {
-	const topicPageQuery = groq`
+    const topicPageQuery = groq`
 		*[_type == "topic"]{
             ...,
             "posts": *[_type == "post" && references(^._id)] | order(datePublished desc)
@@ -15,10 +15,10 @@ export async function getStaticPaths() {
 	`;
     const topics = await sanityClient.fetch<TopicPageQueryResult[]>(topicPageQuery);
 
-	return topics.map(topic => ({
-		params: { slug: topic.slug.current },
-		props: topic
-	}));
+    return topics.map(topic => ({
+        params: { slug: topic.slug.current },
+        props: topic
+    }));
 }
 
 interface TopicPageQueryResult extends Topic {
@@ -30,8 +30,8 @@ const topic = Astro.props;
 
 <BaseLayout title={ topic.name }>
     <h1>{ topic.name }</h1>
-	<PortableText value={ topic.content } />
+    <PortableText value={ topic.content } />
 
-	<h2>Posts</h2>
-	<PostGrid posts={ topic.posts } />
+    <h2>Posts</h2>
+    <PostGrid posts={ topic.posts } />
 </BaseLayout>

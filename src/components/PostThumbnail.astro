@@ -19,14 +19,14 @@ const thumbnailSrc = thumbnail && builder.image(thumbnail).url();
 <Picture
     src={ thumbnailSrc }
     alt={ thumbnail.alt ?? '' }
-    formats={[ 'avif', 'jpeg' ]}
+    formats={ [ 'avif', 'jpeg' ] }
     fallbackFormat='jpeg'
-    widths={[ 540, 1080, 1520 ]}
-    sizes={`
+    widths={ [ 540, 1080, 1520 ] }
+    sizes={ `
         (max-width: 540px) 540px,
         (max-width: 1080px) 1080px,
         1520px
-    `}
+    ` }
     inferSize
 />
 <style>

@@ -13,23 +13,23 @@ const headerQuery = groq`
 const topics = await sanityClient.fetch<Topic[]>(headerQuery);
 
 const links = [
-	{ label: "Calendar", href: "/calendar" },
-	{
-		label: "Blog",
-		links: topics.map(topic => ({
-			label: topic.name,
-			href: `/topics/${ topic.slug.current }`
-		}))
-	}
+    { label: "Calendar", href: "/calendar" },
+    {
+        label: "Blog",
+        links: topics.map(topic => ({
+            label: topic.name,
+            href: `/topics/${ topic.slug.current }`
+        }))
+    }
 ];
 ---
 
 <SkipLink />
 <header>
-	<nav>
-		<NavigationLink href="/" class="nav-logo">{ SITE_TITLE }</NavigationLink>
-		<NavigationLevel links={ links } />
-	</nav>
+    <nav>
+        <NavigationLink href="/" class="nav-logo">{ SITE_TITLE }</NavigationLink>
+        <NavigationLevel links={ links } />
+    </nav>
 </header>
 <style>
 	header {
@@ -41,7 +41,7 @@ const links = [
 		z-index: 1;
 		border-bottom: 1px solid light-dark(var(--zinc-200), var(--zinc-800));
 	}
-	
+
 	nav {
 		display: flex;
 		justify-content: space-between;

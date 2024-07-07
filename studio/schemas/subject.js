@@ -25,7 +25,7 @@ export default {
             type: 'array',
             of: [
                 block
-            ],
+            ]
         }
     ]
 };

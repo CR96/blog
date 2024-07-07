@@ -17,24 +17,24 @@ const regularRows = table.rows.slice(numHeader);
         { headerRows.length && (
             <thead>
                 { headerRows.map(row => (
-                        <tr>
-                            { row.cells?.map(cell => (
-                                <th>{ cell }</th>
-                            )) }
-                        </tr>
-                    ))
+                    <tr>
+                        { row.cells?.map(cell => (
+                            <th>{ cell }</th>
+                        )) }
+                    </tr>
+                ))
                 }
             </thead>
         ) }
         { regularRows.length && (
             <tbody>
                 { regularRows.map(row => (
-                        <tr>
-                            { row.cells?.map(cell => (
-                                <td>{ cell }</td>
-                            )) }
-                        </tr>
-                    ))
+                    <tr>
+                        { row.cells?.map(cell => (
+                            <td>{ cell }</td>
+                        )) }
+                    </tr>
+                ))
                 }
             </tbody>
         ) }

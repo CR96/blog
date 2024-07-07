@@ -13,10 +13,10 @@ export default (S, context) => {
                         .title('Posts')
                         .apiVersion('v2022-03-07')
                         .filter('_type == "post"')
-                        .defaultOrdering([{
+                        .defaultOrdering([ {
                             field: 'datePublished',
                             direction: "desc"
-                        }])
+                        } ])
                 ),
             orderableDocumentListDeskItem({
                 S, context,

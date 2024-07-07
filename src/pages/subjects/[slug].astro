@@ -34,12 +34,12 @@ const subject = Astro.props;
     { subject?.content && (
         <PortableText value={ subject.content } />
     ) }
-    
+
     <h2>References</h2>
     <ul>
         { subject.posts.map(post => {
             const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
-            
+
             return (
                 <li>
                     <a href={ `/${datedSlug}` }>
