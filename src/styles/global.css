@@ -93,7 +93,7 @@ button {
 	margin: 0;
 	background: none;
 	border: none;
-	font-size: inherit;
+	font: inherit;
 	cursor: pointer;
 }
 
