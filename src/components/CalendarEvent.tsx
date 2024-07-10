@@ -85,7 +85,7 @@ export const CalendarEvent = (props : Props) => {
                             <h3>Links</h3>
                             <ul>
                                 { event.links.map(link => (
-                                    <li>
+                                    <li key={ link._key }>
                                         <a
                                             href={ link.url }
                                             rel="noopener noreferrer"
