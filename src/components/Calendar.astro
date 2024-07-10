@@ -47,10 +47,10 @@ const eventsExpanded = events.map(event => {
             RRule.parse(event.date.rrule)
         ]
     });
-    const endRule = new RRuleSet(startRule);
-    endRule.setDtstart(
-        convertToDateTime(event.date.endDate)
-    );
+    const endRule = new RRuleSet({
+        ...startRule.toObject(),
+        dtstart: convertToDateTime(event.date.endDate)
+    });
 
     const sixWeeksFromToday = new Date();
     sixWeeksFromToday.setDate(
