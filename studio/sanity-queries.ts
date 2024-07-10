@@ -126,3 +126,7 @@ export const featuredPostsQuery = groq`
 export const postPreviewQuery = groq`
     *[_type == "post" && _id == $id][0]
 `;
+
+export const calendarQuery = groq`
+    *[_type == "event"]
+`;

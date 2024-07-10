@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { muxInput } from "sanity-plugin-mux-input";
+import { recurringDates } from 'sanity-plugin-recurring-dates'
 import { webhooksTrigger } from 'sanity-plugin-webhooks-trigger';
 import { table } from "@sanity/table";
 import schemas from "./studio/schemas/schema";
@@ -22,6 +23,7 @@ export default defineConfig({
     muxInput({
       max_resolution_tier: '2160p'
     }),
+    recurringDates(),
     visionTool(),
     webhooksTrigger(),
     table()

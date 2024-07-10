@@ -1,0 +1,20 @@
+---
+layout: ../layouts/MarkdownLayout.astro
+title: Calendar
+---
+
+import Calendar from '../components/Calendar.astro';
+
+export const buildTime = new Date();
+export const buildTimeFormatted = buildTime.toLocaleDateString(
+    'en-US',
+    { dateStyle: 'full' }
+);
+
+# Calendar of Events
+
+Something missing? [Send me a message.](/social) If it's transit related, local, and accessible to the general public, I'll add it!
+
+*Last updated on { buildTimeFormatted }.*
+
+<Calendar />
