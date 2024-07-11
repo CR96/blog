@@ -24,5 +24,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# local Netlify folder
-.netlify
+# local Vercel folder
+.vercel

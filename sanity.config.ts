@@ -3,7 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { muxInput } from "sanity-plugin-mux-input";
 import { recurringDates } from 'sanity-plugin-recurring-dates'
-import { webhooksTrigger } from 'sanity-plugin-webhooks-trigger';
+import { vercelDeployTool } from 'sanity-plugin-vercel-deploy';
 import { table } from "@sanity/table";
 import schemas from "./studio/schemas/schema";
 import deskStructure from "./studio/desk-structure";
@@ -25,7 +25,7 @@ export default defineConfig({
     }),
     recurringDates(),
     visionTool(),
-    webhooksTrigger(),
+    vercelDeployTool(),
     table()
   ],
   schema: {

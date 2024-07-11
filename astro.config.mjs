@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { loadEnv } from "vite";
-import netlify from '@astrojs/netlify';
+import vercel from '@astrojs/vercel/serverless';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import sanity from "@sanity/astro";
@@ -16,8 +16,16 @@ const {
 export default defineConfig({
     output: 'hybrid',
     site: 'https://coreyrowe.me',
-    adapter: netlify({
-        imageCDN: false
+    adapter: vercel({
+        imageService: true,
+        imagesConfig: {
+            domains: [
+                'cdn.sanity.io'
+            ],
+            sizes: [
+                540, 760, 1080, 1520
+            ]
+        }
     }),
     integrations: [
         mdx(),
