@@ -1,6 +1,4 @@
 ---
-import { sanityClient } from 'sanity:client';
-import imageUrlBuilder from '@sanity/image-url';
 import CaptionedElement from './CaptionedElement.astro';
 import type { DereferencedContentBlock } from '../../studio/sanity-queries';
 import { Picture } from 'astro:assets';
@@ -9,24 +7,22 @@ type Props = DereferencedContentBlock<'image'>;
 
 const { asset, alt = "", caption } = Astro.props.node;
 
-if (!asset) { return; }
+if (!asset || !asset.url || !asset.metadata?.dimensions) { return; }
 
-const builder = imageUrlBuilder(sanityClient);
-const src = builder.image(asset).url();
+const { width = 0, height = 0 } = asset.metadata.dimensions;
 ---
 
 <CaptionedElement caption={ caption }>
     <Picture
-        src={ src }
+        src={ asset.url }
         alt={ alt }
-        formats={ [ 'avif', 'jpeg' ] }
-        fallbackFormat='jpeg'
+        width={ width }
+        height={ height }
         widths={ [ 760, 1520 ] }
         sizes={ `
             (max-width: 760px) 760px,
             1520px
         ` }
-        inferSize
     />
 </CaptionedElement>
 <style>

@@ -24,6 +24,9 @@ export default defineConfig({
             ],
             sizes: [
                 540, 760, 1080, 1520
+            ],
+            formats: [
+                'image/avif', 'image/webp'
             ]
         }
     }),
