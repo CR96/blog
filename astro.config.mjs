@@ -67,6 +67,19 @@ export default defineConfig({
         '/2023/09/03/milegtransit-vol1': '/topic/milegtransit',
         '/2024/01/10/milegtransit-vol2': '/topic/milegtransit',
         '/2023/09/03/milegtransit-directory': '/topics/legislative-updates/directory',
-        '/milegtransit-directory': '/topics/legislative-updates/directory'
+        '/milegtransit-directory': '/topics/legislative-updates/directory',
+        '/2023/09/03/milegtransit-week1': '/2023/01/19/milegtransit-week1',
+        '/2023/09/03/milegtransit-week3': '/2023/01/26/milegtransit-week3',
+        '/2023/09/03/milegtransit-week4': '/2023/02/02/milegtransit-week4',
+        '/2023/09/03/milegtransit-week5': '/2023/02/09/milegtransit-week5',
+        '/2023/09/03/milegtransit-week7': '/2023/02/23/milegtransit-week7',
+        '/2023/09/03/milegtransit-week8': '/2023/03/02/milegtransit-week8',
+        '/2023/09/03/milegtransit-week9': '/2023/03/16/milegtransit-week10',
+        '/2023/09/03/milegtransit-week12': '/2023/04/13/milegtransit-week12',
+        '/2023/09/03/milegtransit-week14': '/2023/04/27/milegtransit-week14',
+        '/2023/09/03/milegtransit-week15': '/2023/05/04/milegtransit-week15',
+        '/2023/09/03/milegtransit-week16': '/2023/05/11/milegtransit-week16',
+        '/2023/09/03/milegtransit-week17': '/2023/05/18/milegtransit-week17',
+        '/2023/09/03/milegtransit-week18': '/2023/06/28/milegtransit-week18',
     }
 });
