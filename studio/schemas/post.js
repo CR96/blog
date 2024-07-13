@@ -1,6 +1,7 @@
 import alt from '../fields/alt';
 import caption from '../fields/caption';
 import content from '../fields/content';
+import groq from 'groq';
 import { BulbOutlineIcon } from '@sanity/icons';
 import { toPlainText } from '@portabletext/toolkit';
 
@@ -19,7 +20,30 @@ export default {
             title: "Slug",
             type: "slug",
             options: {
-                source: "title"
+                source: "title",
+                isUnique: async (slug, context) => {
+                    const { document, getClient } = context;
+                    const client = getClient({ apiVersion: 'v2022-03-07' });
+                    const id = document._id.replace('drafts.', '');
+
+                    const uniqueSlugQuery = groq`
+                        !defined(
+                            *[
+                                _type == "post" &&
+                                !(_id in [ $id, "drafts." + $id ]) &&
+                                slug.current == $slug &&
+                                datePublished == $datePublished
+                            ][0]
+                        )
+                    `;
+                    return await client.fetch(uniqueSlugQuery, {
+                        id,
+                        slug,
+                        datePublished: document.datePublished
+                    }, {
+                        perspective: 'raw'
+                    });
+                }
             },
             validation: rule => rule.required()
         },
