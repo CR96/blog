@@ -7,13 +7,19 @@ interface Props {
 };
 
 const { caption } = Astro.props;
+const captionSlot = Astro.slots.has('caption');
 ---
 
-{ caption ? (
+{ (caption || captionSlot) ? (
     <figure>
         <slot />
         <figcaption>
-            <PortableText value={ caption } />
+            { !caption ? (
+                <slot name="caption" />
+            ) : (
+                <PortableText value={ caption } />
+            ) }
+            </slot>
         </figcaption>
     </figure>
 ) : (
