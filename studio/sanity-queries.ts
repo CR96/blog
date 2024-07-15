@@ -31,7 +31,10 @@ const postPageQueryValues = `
             ${ contentBlockSubquery },
             _type == "opinion" => {
                 ...,
-                ${ contentBlockSubquery }
+                content[] {
+                    ...,
+                    ${ contentBlockSubquery }
+                },
             }
         },
         topic->,
