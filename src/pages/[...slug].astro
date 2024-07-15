@@ -1,56 +1,18 @@
 ---
-import { sanityClient } from "sanity:client";
-import { postPageQuery } from "../../studio/sanity-queries";
-import type { PostPageQueryResult } from "../../studio/sanity-typegen";
-import { generateDatedPostSlug } from "../util";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PortableText from "../components/PortableText.astro";
-import FormattedDate from "../components/FormattedDate.astro";
-import PostThumbnail from "../components/PostThumbnail.astro";
-import CaptionedElement from "../components/CaptionedElement.astro";
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-    const posts = await sanityClient.fetch<PostPageQueryResult>(postPageQuery);
-
-    return posts.map(post => ({
-        params: { slug: generateDatedPostSlug(post.datePublished, post.slug.current) },
-        props: post
+    const markdownPages = await getCollection('markdown');
+    return markdownPages.map(entry => ({
+        params: { slug: entry.slug.replace(/index$/, '') }, props: { entry },
     }));
-}
+};
 
-type Props = PostPageQueryResult[number];
-const post = Astro.props;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
-<BaseLayout
-    title={ post.title }
-    description={ post?.description }
->
-    <slot />
-    <h1>{ post.title }</h1>
-    <p class="post-metadata">
-        <FormattedDate date={ new Date(post.datePublished) } />
-        {` — `}
-        <a href=`/topics/${ post.topic.slug.current }`>
-            { post.topic.name }
-        </a>
-    </p>
-    { post?.thumbnail && (
-        <CaptionedElement caption={ post.thumbnail.caption }>
-            <PostThumbnail thumbnail={ post.thumbnail } />
-        </CaptionedElement>
-    ) }
-    <PortableText value={ post.content } />
+<BaseLayout { ...entry.data }>
+    <Content />
 </BaseLayout>
-<style>
-	h1 {
-		font-size: 2rem;
-	}
-
-	.post-metadata {
-		font-size: 1.25rem;
-		font-weight: 300;
-		color: light-dark(var(--zinc-700), var(--zinc-400));
-		margin-bottom: 3.5rem;
-	}
-</style>

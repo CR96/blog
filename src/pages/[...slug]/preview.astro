@@ -4,7 +4,7 @@ export const prerender =  false;
 import { sanityClient } from 'sanity:client';
 import { previewPostPageQuery } from '../../../studio/sanity-queries';
 import type { PreviewPostPageQueryResult } from '../../../studio/sanity-typegen';
-import PostPage from '../[...slug].astro';
+import PostPage from './index.astro';
 import PreviewOverlay from '../../components/PreviewOverlay.astro';
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
 import { fakeSanityPreviewUrl } from '../../util';
