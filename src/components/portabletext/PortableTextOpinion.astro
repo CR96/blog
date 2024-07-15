@@ -1,38 +1,13 @@
 ---
-import { uniqueId } from '@/util';
-import type { DereferencedContentBlock } from "@studio/sanity-queries";
+import Opinion from '@components/common/Opinion.astro';
 import PortableText from "@components/portabletext/PortableText.astro";
+import type { DereferencedContentBlock } from "@studio/sanity-queries";
 
 type Props = DereferencedContentBlock<'opinion'>;
 
 const { content } = Astro.props.node;
-
-const headerId = uniqueId("opinion-header");
 ---
 
-<div
-    class="opinion-container"
-    role="group"
-    aria-labelledby={ headerId }
->
-    <div class="opinion-header" id={ headerId }>
-        My thoughts 👋
-    </div>
+<Opinion>
     <PortableText value={ content } />
-</div>
-<style>
-    .opinion-container {
-        background: light-dark(#e7ebf3, #1e2229);
-        margin-block: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-    }
-
-    .opinion-header {
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-block: 1rem;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-    }
-</style>
+</Opinion>

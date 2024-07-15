@@ -1,7 +1,7 @@
 ---
+import Image from '@components/common/Image.astro';
 import CaptionedElement from '@components/CaptionedElement.astro';
 import type { DereferencedContentBlock } from '@studio/sanity-queries';
-import { Picture } from 'astro:assets';
 
 type Props = DereferencedContentBlock<'image'>;
 
@@ -13,16 +13,11 @@ const { width = 0, height = 0 } = asset.metadata.dimensions;
 ---
 
 <CaptionedElement caption={ caption }>
-    <Picture
+    <Image
         src={ asset.url }
         alt={ alt }
         width={ width }
         height={ height }
-        widths={ [ 760, 1520 ] }
-        sizes={ `
-            (max-width: 760px) 760px,
-            1520px
-        ` }
     />
 </CaptionedElement>
 <style>

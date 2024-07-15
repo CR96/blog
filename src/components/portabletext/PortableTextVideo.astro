@@ -1,4 +1,5 @@
 ---
+import Video from "@components/common/Video.astro";
 import CaptionedElement from "@components/CaptionedElement.astro";
 import type { DereferencedContentBlock } from '@studio/sanity-queries';
 
@@ -9,15 +10,5 @@ const { asset } = video;
 ---
 
 <CaptionedElement caption={ caption }>
-    <mux-player playback-id={ asset.playbackId } />
+    <Video playbackId={ asset.playbackId } />
 </CaptionedElement>
-<script>
-    import '@mux/mux-player';</script>
-<style>
-    mux-player {
-        aspect-ratio: 16 / 9;
-        --media-accent-color: var(--blue-700);
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-</style>

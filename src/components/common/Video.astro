@@ -1,0 +1,20 @@
+---
+interface Props {
+    playbackId: string
+}
+
+const { playbackId } = Astro.props;
+---
+
+<mux-player playback-id={ playbackId } />
+<script>
+    import '@mux/mux-player';
+</script>
+<style>
+    mux-player {
+        aspect-ratio: 16 / 9;
+        --media-accent-color: var(--blue-700);
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+</style>

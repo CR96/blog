@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
+
+interface Props extends HTMLAttributes<'a'> {
+    href: string | URL,
+    class?: string
+};
+
+const { href, class: className = '', ...props } = Astro.props;
+
+const asURL = new URL(href, Astro.url.origin);
+const isRelative = Astro.url.origin == asURL.origin;
+---
+
+<a
+    href={ href }
+    class:list={ [
+        { 'link-external': !isRelative },
+        ...className
+    ] }
+    { ...props }
+>
+    { isRelative ? (
+        <slot />
+    ) : (
+        <span class="link-label">
+            <slot />
+        </span>
+        <FaArrowUpRightFromSquare />
+    ) }
+</a>
+<style>
+    .link-external {
+		text-decoration: none;
+
+		& > .link-label {
+			text-decoration-line: underline;
+			text-decoration-color: currentColor;
+			text-decoration-style: dotted;
+			text-decoration-thickness: 3px;
+		}
+
+		svg {
+            font-size: 0.7em;
+            vertical-align: 2px;
+            margin-left: 0.15em;
+        }
+	}
+</style>

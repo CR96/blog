@@ -1,4 +1,5 @@
 ---
+import Link from '@components/common/Link.astro';
 import type { DereferencedContentMark } from '@studio/sanity-queries';
 
 type Props = DereferencedContentMark<'subject'>;
@@ -7,6 +8,6 @@ const { markDef } = Astro.props.node;
 const { subject } = markDef;
 ---
 
-<a href={ `/subjects/${subject.slug.current}` }>
+<Link href={ `/subjects/${subject.slug.current}` }>
     <slot />
-</a>
+</Link>
