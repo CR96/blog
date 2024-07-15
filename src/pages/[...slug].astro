@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import Link from '@components/common/Link.astro';
+import Image from '@components/common/Image.astro';
 
 export async function getStaticPaths() {
     const markdownPages = await getCollection('markdown');
@@ -11,8 +13,13 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const components = {
+    a: Link,
+    img: Image
+};
 ---
 
 <BaseLayout { ...entry.data }>
-    <Content />
+    <Content components={ components } />
 </BaseLayout>
