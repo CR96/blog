@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, type PropsWithChildren } from 'react';
 import type { CalendarQueryResult } from '@studio/sanity-typegen';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa6';
 import styles from '@styles/components/CalendarEvent.module.css';
 
-interface Props {
+interface Props extends PropsWithChildren {
     event: CalendarQueryResult[number]
 }
 
 export const CalendarEvent = (props : Props) => {
-    const { event } = props;
+    const { event, children } = props;
 
     const [ isOpened, setOpened ] = useState(false);
 
@@ -27,12 +27,6 @@ export const CalendarEvent = (props : Props) => {
             .toLocaleTimeString('en-US', { timeStyle: 'short' })
             .toLowerCase();
     }).join(' — ');
-
-    const emptyEvent =
-        !event.location &&
-        !event.description &&
-        !event.accessibility &&
-        !event.links?.length;
 
     return (
         <div className={ styles['event-container'] }>
@@ -60,51 +54,7 @@ export const CalendarEvent = (props : Props) => {
                     ) }
                 </div>
             </button>
-            { isOpened && (
-                <div className={ styles['event-details'] }>
-                    { event.location && (
-                        <div className={ styles['event-detail'] }>
-                            <h3>Location</h3>
-                            <p>{ event.location }</p>
-                        </div>
-                    ) }
-                    { event.description && (
-                        <div className={ styles['event-detail'] }>
-                            <h3>Description</h3>
-                            <p>{ event.description }</p>
-                        </div>
-                    ) }
-                    { event.accessibility && (
-                        <div className={ styles['event-detail'] }>
-                            <h3>Accessibility</h3>
-                            <p>{ event.accessibility }</p>
-                        </div>
-                    ) }
-                    { event.links?.length && (
-                        <div className={ styles['event-detail'] }>
-                            <h3>Links</h3>
-                            <ul>
-                                { event.links.map(link => (
-                                    <li key={ link._key }>
-                                        <a
-                                            href={ link.url }
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                        >
-                                            { link.label }
-                                        </a>
-                                    </li>
-                                )) }
-                            </ul>
-                        </div>
-                    ) }
-                    { emptyEvent && (
-                        <div className={ styles['event-detail'] }>
-                            <p><i>No details available.</i></p>
-                        </div>
-                    ) }
-                </div>
-            ) }
+            { isOpened && children }
         </div>
     );
 };

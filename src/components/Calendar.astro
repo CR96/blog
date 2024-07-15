@@ -4,6 +4,7 @@ import { calendarQuery } from '@studio/sanity-queries';
 import type { CalendarQueryResult } from '@studio/sanity-typegen';
 import { RRule, RRuleSet, DateTime } from 'rrule-rust';
 import { CalendarEvent } from '@components/CalendarEvent';
+import CalendarEventDetails from '@components/CalendarEventDetails.astro';
 
 const events = await sanityClient.fetch<CalendarQueryResult>(calendarQuery);
 
@@ -96,7 +97,9 @@ const eventsByDate = eventsExpanded.sort((a, b) => {
         <div class="calendar-day">
             <h2>{ date }</h2>
             { eventsByDate[date].map(event => (
-                <CalendarEvent event={ event! } client:load />
+                <CalendarEvent event={ event! } client:load>
+                    <CalendarEventDetails event={ event! } />
+                </CalendarEvent>
             )) }
         </div>
     )) }
