@@ -19,6 +19,10 @@ const isRelative = Astro.url.origin == asURL.origin;
         { 'link-external': !isRelative },
         ...className
     ] }
+    { ...(!isRelative && {
+        target: props.target ?? '_blank',
+        rel: props.rel ?? 'noopener noreferrer'
+    }) }
     { ...props }
 >
     { isRelative ? (
