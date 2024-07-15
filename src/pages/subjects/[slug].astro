@@ -3,7 +3,7 @@ import { sanityClient } from "sanity:client";
 import { subjectPageQuery } from "@studio/sanity-queries";
 import type { SubjectPageQueryResult } from '@studio/sanity-typegen';
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PortableText from "@components/PortableText.astro";
+import PortableText from "@components/portabletext/PortableText.astro";
 import { generateDatedPostSlug } from "@/util";
 
 export async function getStaticPaths() {

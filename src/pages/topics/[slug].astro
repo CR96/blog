@@ -4,7 +4,7 @@ import { topicPageQuery } from "@studio/sanity-queries";
 import type { TopicPageQueryResult } from "@studio/sanity-typegen";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PostGrid from "@components/PostGrid.astro";
-import PortableText from "@components/PortableText.astro";
+import PortableText from "@components/portabletext/PortableText.astro";
 
 export async function getStaticPaths() {
     const topics = await sanityClient.fetch<TopicPageQueryResult>(topicPageQuery);
