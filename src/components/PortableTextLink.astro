@@ -1,0 +1,44 @@
+---
+import type { DereferencedContentMark } from '../../studio/sanity-queries';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
+
+type Props = DereferencedContentMark<'link'>;
+
+const { markDef } = Astro.props.node;
+const { href } = markDef;
+
+const asURL = new URL(href, Astro.url.origin);
+const isRelative = Astro.url.origin == asURL.origin;
+---
+
+<a
+    href={ href }
+    class={ !isRelative ? 'link-external' : '' }
+>
+    { isRelative ? (
+        <slot />
+    ) : (
+        <span class="link-label">
+            <slot />
+        </span>
+        <FaArrowUpRightFromSquare />
+    ) }
+</a>
+<style>
+    .link-external {
+		text-decoration: none;
+
+		& > .link-label {
+			text-decoration-line: underline;
+			text-decoration-color: currentColor;
+			text-decoration-style: dotted;
+			text-decoration-thickness: 3px;
+		}
+
+		svg {
+            font-size: 0.7em;
+            vertical-align: 2px;
+            margin-left: 0.15em;
+        }
+	}
+</style>

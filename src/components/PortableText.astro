@@ -4,9 +4,10 @@ import type { PortableTextProps } from 'astro-portabletext/types';
 import PortableTextImage from "./PortableTextImage.astro";
 import PortableTextTweet from './PortableTextTweet.astro';
 import PortableTextVideo from './PortableTextVideo.astro';
-import PortableTextSubject from './PortableTextSubject.astro';
 import PortableTextTable from './PortableTextTable.astro';
 import PortableTextOpinion from './PortableTextOpinion.astro';
+import PortableTextLink from './PortableTextLink.astro';
+import PortableTextSubject from './PortableTextSubject.astro';
 
 type Props = PortableTextProps;
 
@@ -21,6 +22,7 @@ const components = {
         opinion: PortableTextOpinion
     },
     mark: {
+        link: PortableTextLink,
         subject: PortableTextSubject
     }
 };
