@@ -1,19 +1,22 @@
 ---
+import type { MarkdownLayoutProps } from "astro";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-interface Props {
+type Props = MarkdownLayoutProps<{
     title: string;
     description?: string;
     image?: string;
-}
+}>;
+
+const props = Astro.props.frontmatter || Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead { ...Astro.props } />
+        <BaseHead { ...props } />
     </head>
     <body>
         <Header />
