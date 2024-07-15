@@ -64,8 +64,8 @@ export default defineConfig({
     },
     redirects: {
         '/blog': '/',
-        '/2023/09/03/milegtransit-vol1': '/topic/legislative-updates',
-        '/2024/01/10/milegtransit-vol2': '/topic/legislative-updates',
+        '/2023/09/03/milegtransit-vol1': '/topics/legislative-updates',
+        '/2024/01/10/milegtransit-vol2': '/topics/legislative-updates',
         '/2023/09/03/milegtransit-directory': '/topics/legislative-updates/directory',
         '/milegtransit-directory': '/topics/legislative-updates/directory',
         '/2023/09/03/milegtransit-week1': '/2023/01/19/milegtransit-week1',
