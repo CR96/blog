@@ -49,6 +49,9 @@ export default defineConfig({
             'cdn.sanity.io'
         ]
     },
+    markdown: {
+        gfm: false
+    },
     vite: {
         envPrefix: [
             'SANITY_STUDIO_'
