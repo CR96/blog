@@ -1,4 +1,4 @@
-import block from '../fields/block';
+import block from '@studio/fields/block';
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export default {

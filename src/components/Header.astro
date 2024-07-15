@@ -1,11 +1,11 @@
 ---
-import SkipLink from './SkipLink.astro';
-import NavigationLevel from './NavigationLevel.astro';
+import SkipLink from '@components/SkipLink.astro';
+import NavigationLevel from '@components/NavigationLevel.astro';
 import { sanityClient } from 'sanity:client';
-import { headerQuery } from '../../studio/sanity-queries';
-import type { HeaderQueryResult } from '../../studio/sanity-typegen';
-import NavigationLink from './NavigationLink.astro';
-import { SITE_TITLE } from '../consts';
+import { headerQuery } from '@studio/sanity-queries';
+import type { HeaderQueryResult } from '@studio/sanity-typegen';
+import NavigationLink from '@components/NavigationLink.astro';
+import { SITE_TITLE } from '@/consts';
 
 const topics = await sanityClient.fetch<HeaderQueryResult>(headerQuery);
 

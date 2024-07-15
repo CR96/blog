@@ -1,4 +1,4 @@
-import block from "../fields/block";
+import block from "@studio/fields/block";
 
 export default {
     name: 'event',

@@ -5,9 +5,9 @@ import { muxInput } from "sanity-plugin-mux-input";
 import { recurringDates } from 'sanity-plugin-recurring-dates'
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy';
 import { table } from "@sanity/table";
-import schemas from "./studio/schemas/schema";
-import deskStructure from "./studio/desk-structure";
-import { PreviewAction } from "./studio/components/PreviewAction";
+import schemas from "@studio/schemas/schema";
+import deskStructure from "@studio/desk-structure";
+import { PreviewAction } from "@studio/components/PreviewAction";
 
 export default defineConfig({
   name: "blog",

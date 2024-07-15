@@ -1,8 +1,8 @@
 ---
 import { sanityClient } from "sanity:client";
-import { subjectIndexQuery } from "../../../studio/sanity-queries";
-import type { SubjectIndexQueryResult } from "../../../studio/sanity-typegen";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import { subjectIndexQuery } from "@studio/sanity-queries";
+import type { SubjectIndexQueryResult } from "@studio/sanity-typegen";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const subjects = await sanityClient.fetch<SubjectIndexQueryResult>(subjectIndexQuery);
 

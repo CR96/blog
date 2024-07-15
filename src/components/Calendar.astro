@@ -1,9 +1,9 @@
 ---
 import { sanityClient } from 'sanity:client';
-import { calendarQuery } from '../../studio/sanity-queries';
-import type { CalendarQueryResult } from '../../studio/sanity-typegen';
+import { calendarQuery } from '@studio/sanity-queries';
+import type { CalendarQueryResult } from '@studio/sanity-typegen';
 import { RRule, RRuleSet, DateTime } from 'rrule-rust';
-import { CalendarEvent } from './CalendarEvent';
+import { CalendarEvent } from '@components/CalendarEvent';
 
 const events = await sanityClient.fetch<CalendarQueryResult>(calendarQuery);
 

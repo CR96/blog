@@ -2,9 +2,9 @@ import { useClient, useCurrentUser } from 'sanity';
 import type { DocumentActionDescription, DocumentActionProps } from 'sanity';
 import { createPreviewSecret } from '@sanity/preview-url-secret/create-secret';
 import { EyeOpenIcon } from '@sanity/icons';
-import { generateDatedPostSlug } from '../../src/util';
-import { postPreviewQuery } from '../../studio/sanity-queries';
-import type { PostPreviewQueryResult } from '../../studio/sanity-typegen';
+import { generateDatedPostSlug } from '@/util';
+import { postPreviewQuery } from '@studio/sanity-queries';
+import type { PostPreviewQueryResult } from '@studio/sanity-typegen';
 
 export const PreviewAction = (props: DocumentActionProps) => {
     const { id, type, draft } = props;

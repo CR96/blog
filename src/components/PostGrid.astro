@@ -1,6 +1,6 @@
 ---
-import PostPreview from "./PostPreview.astro";
-import type { TopicPageQueryResult } from "../../studio/sanity-typegen";
+import PostPreview from "@components/PostPreview.astro";
+import type { TopicPageQueryResult } from "@studio/sanity-typegen";
 
 interface Props {
     posts: TopicPageQueryResult[number]['posts'];

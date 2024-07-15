@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { CalendarQueryResult } from '../../studio/sanity-typegen';
+import type { CalendarQueryResult } from '@studio/sanity-typegen';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa6';
-import styles from '../styles/components/CalendarEvent.module.css';
+import styles from '@styles/components/CalendarEvent.module.css';
 
 interface Props {
     event: CalendarQueryResult[number]

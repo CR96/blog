@@ -1,13 +1,13 @@
 ---
 import { sanityClient } from "sanity:client";
-import { postPageQuery } from "../../../studio/sanity-queries";
-import type { PostPageQueryResult } from "../../../studio/sanity-typegen";
-import { generateDatedPostSlug } from "../../util";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import PortableText from "../../components/PortableText.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
-import PostThumbnail from "../../components/PostThumbnail.astro";
-import CaptionedElement from "../../components/CaptionedElement.astro";
+import { postPageQuery } from "@studio/sanity-queries";
+import type { PostPageQueryResult } from "@studio/sanity-typegen";
+import { generateDatedPostSlug } from "@/util";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PortableText from "@components/PortableText.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import PostThumbnail from "@components/PostThumbnail.astro";
+import CaptionedElement from "@components/CaptionedElement.astro";
 
 export async function getStaticPaths() {
     const posts = await sanityClient.fetch<PostPageQueryResult>(postPageQuery);

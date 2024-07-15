@@ -2,12 +2,12 @@
 export const prerender =  false;
 
 import { sanityClient } from 'sanity:client';
-import { previewPostPageQuery } from '../../../studio/sanity-queries';
-import type { PreviewPostPageQueryResult } from '../../../studio/sanity-typegen';
-import PostPage from './index.astro';
-import PreviewOverlay from '../../components/PreviewOverlay.astro';
+import { previewPostPageQuery } from '@studio/sanity-queries';
+import type { PreviewPostPageQueryResult } from '@studio/sanity-typegen';
+import PostPage from '@pages/[...slug]/index.astro';
+import PreviewOverlay from '@components/PreviewOverlay.astro';
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
-import { fakeSanityPreviewUrl } from '../../util';
+import { fakeSanityPreviewUrl } from '@/util';
 
 const token = Astro.url.searchParams.get('token');
 if (!token) {

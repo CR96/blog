@@ -1,8 +1,8 @@
 ---
-import type { TopicPageQueryResult } from '../../studio/sanity-typegen';
-import { generateDatedPostSlug } from "../util";
-import FormattedDate from './FormattedDate.astro';
-import PostThumbnail from './PostThumbnail.astro';
+import type { TopicPageQueryResult } from '@studio/sanity-typegen';
+import { generateDatedPostSlug } from "@/util";
+import FormattedDate from '@components/FormattedDate.astro';
+import PostThumbnail from '@components/PostThumbnail.astro';
 
 interface Props {
     post: TopicPageQueryResult[number]['posts'][number]

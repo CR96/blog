@@ -1,7 +1,7 @@
-import post from "./post";
-import topic from "./topic";
-import subject from "./subject";
-import event from "./event";
+import post from "@studio/schemas/post";
+import topic from "@studio/schemas/topic";
+import subject from "@studio/schemas/subject";
+import event from "@studio/schemas/event";
 
 export default [
     post,

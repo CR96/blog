@@ -1,6 +1,6 @@
-import alt from '../fields/alt';
-import caption from '../fields/caption';
-import content from '../fields/content';
+import alt from '@studio/fields/alt';
+import caption from '@studio/fields/caption';
+import content from '@studio/fields/content';
 import groq from 'groq';
 import { BulbOutlineIcon } from '@sanity/icons';
 import { toPlainText } from '@portabletext/toolkit';

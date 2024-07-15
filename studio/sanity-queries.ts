@@ -1,5 +1,5 @@
 import groq from "groq";
-import type { PostPageQueryResult } from "./sanity-typegen";
+import type { PostPageQueryResult } from "@studio/sanity-typegen";
 import type { Props as PortableTextProps, Mark } from 'astro-portabletext/types';
 
 const contentBlockSubquery = `

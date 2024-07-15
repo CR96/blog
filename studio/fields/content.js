@@ -1,6 +1,6 @@
-import alt from '../fields/alt';
-import caption from '../fields/caption';
-import block from '../fields/block';
+import alt from '@studio/fields/alt';
+import caption from '@studio/fields/caption';
+import block from '@studio/fields/block';
 import { BookIcon, ImageIcon, PresentationIcon, ThListIcon, TwitterIcon } from "@sanity/icons";
 
 export default {
