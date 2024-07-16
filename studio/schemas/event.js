@@ -1,5 +1,3 @@
-import block from "@studio/fields/block";
-
 export default {
     name: 'event',
     type: 'document',

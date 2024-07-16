@@ -1,6 +1,3 @@
-import { sanityClient } from "sanity:client";
-import groq from "groq";
-import type { SanityReference } from "@sanity/client";
 import { urlSearchParamPreviewSecret } from '@sanity/preview-url-secret';
 
 export const generateDatedPostSlug = (datePublished: string, baseSlug: string) => {
