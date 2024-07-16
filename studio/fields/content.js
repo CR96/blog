@@ -12,22 +12,7 @@ export default {
             ...block,
             marks: {
                 annotations: [
-                    {
-                        name: "link",
-                        title: "Link",
-                        type: "object",
-                        fields: [
-                            {
-                                name: "href",
-                                title: "Link",
-                                description: "A valid web, email, phone, or relative link.",
-                                type: "url",
-                                validation: rule => rule.uri({
-                                    allowRelative: true
-                                }).required()
-                            }
-                        ]
-                    },
+                    ...block.marks.annotations,
                     {
                         name: "subject",
                         title: "Subject",
