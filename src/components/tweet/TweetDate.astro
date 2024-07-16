@@ -1,4 +1,5 @@
 ---
+import Link from '@components/common/Link.astro';
 import type { EnrichedTweet } from 'react-tweet';
 
 interface Props {
@@ -19,10 +20,9 @@ const createdDateFormatted = [
 ].join(' • ');
 ---
 
-<a
+<Link
     href={ tweet.url }
-    rel="noopener noreferrer"
-    target="_blank"
+    icon={ false }
 >
     { createdDateFormatted }
-</a>
+</Link>

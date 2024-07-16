@@ -6,6 +6,7 @@ import { generateDatedPostSlug } from "@/util";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PortableText from "@components/portabletext/PortableText.astro";
 import FormattedDate from "@components/FormattedDate.astro";
+import Link from "@components/common/Link.astro";
 import PostThumbnail from "@components/PostThumbnail.astro";
 import CaptionedElement from "@components/CaptionedElement.astro";
 
@@ -31,9 +32,9 @@ const post = Astro.props;
     <p class="post-metadata">
         <FormattedDate date={ new Date(post.datePublished) } />
         {` — `}
-        <a href=`/topics/${ post.topic.slug.current }`>
+        <Link href=`/topics/${ post.topic.slug.current }`>
             { post.topic.name }
-        </a>
+        </Link>
     </p>
     { post?.thumbnail && (
         <CaptionedElement caption={ post.thumbnail.caption }>

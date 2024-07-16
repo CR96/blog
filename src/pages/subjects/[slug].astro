@@ -4,6 +4,7 @@ import { subjectPageQuery } from "@studio/sanity-queries";
 import type { SubjectPageQueryResult } from '@studio/sanity-typegen';
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PortableText from "@components/portabletext/PortableText.astro";
+import Link from "@components/common/Link.astro";
 import { generateDatedPostSlug } from "@/util";
 
 export async function getStaticPaths() {
@@ -32,9 +33,9 @@ const subject = Astro.props;
 
             return (
                 <li>
-                    <a href={ `/${datedSlug}` }>
+                    <Link href={ `/${datedSlug}` }>
                         { post.title }
-                    </a>
+                    </Link>
                 </li>
             );
         }) }

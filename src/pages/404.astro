@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Link from "@components/common/Link.astro";
 import banner from "@images/shelter-404.png";
 ---
 
@@ -12,7 +13,7 @@ import banner from "@images/shelter-404.png";
     />
     <div class="error-container">
         <h1>404</h1>
-        <p>Bus not found. Go <a href="/">home</a> or <a href="/topics/adventures">read an article</a> while you wait.</p>
+        <p>Bus not found. Go <Link href="/">home</Link> or <Link href="/topics/adventures">read an article</Link> while you wait.</p>
     </div>
 </BaseLayout>
 <style>

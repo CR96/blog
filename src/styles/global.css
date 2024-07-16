@@ -60,15 +60,8 @@ h6 {
 }
 
 a {
-	color: light-dark(var(--blue-600), var(--blue-500));
-	text-decoration-color: currentColor;
-	text-decoration-style: dotted;
-	text-decoration-thickness: 3px;
-
-	&:hover,
-	&:focus {
-		color: light-dark(var(--blue-800), var(--blue-400));
-	}
+	color: inherit;
+	text-decoration: none;
 }
 
 a,

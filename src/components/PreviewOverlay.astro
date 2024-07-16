@@ -1,9 +1,11 @@
 ---
+import Link from "@components/common/Link.astro";
+
 const publicUrl = Astro.url.pathname.replace('/preview', '');
 ---
 
 <div class="preview-overlay">
-    <span>You're viewing this page in preview mode. <a href={ publicUrl }>Switch to public version.</a></span>
+    <span>You're viewing this page in preview mode. <Link href={ publicUrl }>Switch to public version</Link>.</span>
 </div>
 <style>
     .preview-overlay {

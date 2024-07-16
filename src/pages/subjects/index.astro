@@ -3,6 +3,7 @@ import { sanityClient } from "sanity:client";
 import { subjectIndexQuery } from "@studio/sanity-queries";
 import type { SubjectIndexQueryResult } from "@studio/sanity-typegen";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Link from "@components/common/Link.astro";
 
 const subjects = await sanityClient.fetch<SubjectIndexQueryResult>(subjectIndexQuery);
 
@@ -26,9 +27,9 @@ const letterHeadings = Object.keys(groupedSubjects);
         <ul>
             { groupedSubjects[letter]?.map(subject => (
                 <li>
-                    <a href={ `/subjects/${subject.slug.current}` }>
+                    <Link href={ `/subjects/${subject.slug.current}` }>
                         { subject.name }
-                    </a>
+                    </Link>
                 </li>
             )) }
         </ul>
