@@ -1,20 +1,23 @@
 ---
+import BaseVideo from '@components/common/BaseVideo.astro';
+
 interface Props {
     playbackId: string
 }
 
 const { playbackId } = Astro.props;
+
+const srcParams = new URLSearchParams();
+srcParams.append('default_subtitles_lang', 'en');
+
+const src =
+    `https://stream.mux.com/${ playbackId }.m3u8?${ srcParams }`;
+const poster =
+    `https://image.mux.com/${ playbackId }/thumbnail.webp`;
 ---
 
-<mux-player playback-id={ playbackId } />
-<script>
-    import '@mux/mux-player';
-</script>
-<style>
-    mux-player {
-        aspect-ratio: 16 / 9;
-        --media-accent-color: var(--blue-700);
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-</style>
+<BaseVideo
+    src={ src }
+    poster={ poster }
+    type="application/x-mpegURL"
+/>
