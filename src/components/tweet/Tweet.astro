@@ -1,0 +1,42 @@
+---
+import { getTweet } from 'react-tweet/api';
+import { enrichTweet } from 'react-tweet';
+import Quote from '@components/common/Quote.astro';
+import TweetAuthor from '@components/tweet/TweetAuthor.astro';
+import TweetDate from '@components/tweet/TweetDate.astro';
+import TweetBody from '@components/tweet/TweetBody.astro';
+import TweetMedia from '@components/tweet/TweetMedia.astro';
+
+interface Props {
+    id: string,
+    quoted?: boolean
+}
+
+const { id, quoted = false } = Astro.props;
+
+const tweet = await getTweet(id);
+if (!tweet) { return; }
+
+const enrichedTweet = await enrichTweet(tweet);
+---
+
+<Quote
+    class="tweet-container"
+    useDash={ false }
+>
+    <TweetAuthor tweet={ enrichedTweet } />
+    <TweetBody tweet={ enrichedTweet } />
+    { tweet.mediaDetails?.length && (
+        <TweetMedia tweet={ enrichedTweet } />
+    ) }
+    { tweet.quoted_tweet && !quoted && (
+        <Astro.self
+            id={ tweet.quoted_tweet.id_str }
+            quoted={ true }
+        />
+    ) }
+    <TweetDate
+        tweet={ enrichedTweet }
+        slot="attribution"
+    />
+</Quote>

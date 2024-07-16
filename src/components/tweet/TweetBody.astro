@@ -1,0 +1,68 @@
+---
+import type { EnrichedTweet } from 'react-tweet';
+
+interface Props {
+    tweet: EnrichedTweet
+}
+
+type Entity = typeof tweet.entities[number];
+
+const { tweet } = Astro.props;
+
+const entitiesByParagraph = tweet.entities.reduce((
+    accumulator: Entity[][], current
+) => {
+    const paragraphs = current.text.split(/[\n]+/);
+    const paragraphEntities = paragraphs.map(paragraph => {
+        const clonedBase = structuredClone(current);
+        clonedBase.text = paragraph;
+        return clonedBase;
+    });
+    
+    if (accumulator.length) {
+        accumulator[accumulator.length - 1].push(
+            paragraphEntities.shift()!
+        );
+    }
+
+    accumulator.push(
+        ...paragraphEntities.map(paragraph => [ paragraph ])
+    );
+    return accumulator;
+}, []);
+---
+
+<div
+    lang={ tweet.lang }
+    dir="auto"
+>
+    { entitiesByParagraph.map(paragraph => (
+        <p>
+            { paragraph.map(item => {
+                switch (item.type) {
+                    case 'hashtag':
+                    case 'mention':
+                    case 'url':
+                    case 'symbol':
+                        return (
+                            <a href={ item.href }>
+                                { item.text }
+                            </a>
+                        );
+                    case 'media':
+                        return;
+                    default:
+                        return (
+                            <span set:html={ item.text } />
+                        );
+                }
+            }) }
+        </p>
+    )) }
+</div>
+<style>
+    p {
+        margin-block: 0.65rem;
+        overflow-wrap: break-word;
+    }
+</style>

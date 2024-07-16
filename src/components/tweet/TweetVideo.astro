@@ -1,0 +1,30 @@
+---
+import { getMediaUrl, getMp4Video } from 'react-tweet';
+import type { MediaVideo, MediaAnimatedGif } from 'react-tweet/api';
+
+interface Props {
+    media: MediaVideo | MediaAnimatedGif
+}
+
+const { media } = Astro.props;
+
+const mp4Video = getMp4Video(media);
+const poster = getMediaUrl(media, "small");
+---
+
+<video
+    poster={ poster }
+    controls
+    muted
+    preload="metadata"
+>
+    <source
+        src={ mp4Video.url }
+        type={ mp4Video.content_type }
+    />
+</video>
+<style>
+    video {
+        width: 100%;
+    }
+</style>

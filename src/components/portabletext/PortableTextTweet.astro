@@ -1,5 +1,5 @@
 ---
-import Tweet from '@components/common/Tweet.astro';
+import Tweet from '@components/tweet/Tweet.astro';
 import CaptionedElement from '@components/CaptionedElement.astro';
 import type { DereferencedContentBlock } from '@studio/sanity-queries';
 
@@ -9,5 +9,5 @@ const { id, caption } = Astro.props.node;
 ---
 
 <CaptionedElement caption={ caption }>
-    <Tweet id={ id } client:load />
+    <Tweet id={ id } />
 </CaptionedElement>

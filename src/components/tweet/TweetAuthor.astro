@@ -1,0 +1,39 @@
+---
+import type { EnrichedTweet } from 'react-tweet';
+
+interface Props {
+    tweet: EnrichedTweet
+}
+
+const { tweet } = Astro.props;
+---
+
+<div class="tweet-author">
+    <img
+        class="tweet-profile-picture"
+        src={ tweet.user.profile_image_url_https }
+        alt={ tweet.user.name }
+    />
+    { tweet.user.name }
+    <span class="tweet-username">
+        (@{ tweet.user.screen_name })
+    </span>
+</div>
+<style>
+    .tweet-author {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        font-weight: 600;
+        margin-block: 1rem;
+    }
+
+    .tweet-profile-picture {
+        width: 1.45rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        margin-right: 0.25rem;
+        padding-bottom: 2px;
+    }
+</style>
