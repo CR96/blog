@@ -1,7 +1,8 @@
 import alt from '@studio/fields/alt';
 import caption from '@studio/fields/caption';
 import block from '@studio/fields/block';
-import { BookIcon, ImageIcon, PresentationIcon, ThListIcon, TwitterIcon } from "@sanity/icons";
+import { BookIcon, ImageIcon, PresentationIcon, ThListIcon, TwitterIcon, BlockquoteIcon } from "@sanity/icons";
+import { toPlainText } from '@portabletext/toolkit';
 
 export default {
     name: "content",
@@ -104,6 +105,41 @@ export default {
                     return {
                         title: "Tweet",
                         subtitle: id
+                    };
+                }
+            }
+        },
+        {
+            name: "quote",
+            title: "Quote",
+            type: "object",
+            icon: BlockquoteIcon,
+            fields: [
+                {
+                    name: "quote",
+                    title: "Quote",
+                    type: "array",
+                    description: "Don't include quotation marks",
+                    of: [
+                        block
+                    ],
+                    validation: rule => rule.required()
+                },
+                {
+                    name: "attribution",
+                    title: "Attribution",
+                    type: "string",
+                    description: "Don't include a dash or hyphen at the start"
+                }
+            ],
+            preview: {
+                select: {
+                    quote: "quote"
+                },
+                prepare: ({ quote }) => {
+                    return {
+                        title: "Quote",
+                        subtitle: quote ? toPlainText(quote) : false
                     };
                 }
             }
