@@ -29,17 +29,17 @@ export const CalendarEvent = (props : Props) => {
     }).join(' — ');
 
     return (
-        <div className={ styles['event-container'] }>
+        <div className={ styles['calendar-event'] }>
             <button
-                className={ styles['event-disclosure'] }
+                className={ styles['calendar-event__disclosure'] }
                 aria-expanded={ isOpened }
                 onClick={ toggleDisclosure }
             >
                 <div>
-                    <div className={ styles['event-name'] }>
+                    <div className={ styles['calendar-event__name'] }>
                         { event.name }
                     </div>
-                    <div className={ styles['event-time'] }>
+                    <div className={ styles['calendar-event__time'] }>
                         { timeLabel }
                         { daySpan > 0 && (
                             <sup> +{ daySpan }</sup>

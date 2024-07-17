@@ -24,7 +24,7 @@ const needsIcon = !isRelative && wantsIcon;
 <a
     href={ href }
     class:list={ [
-        { 'link-external': needsIcon },
+        { 'link--external': needsIcon },
         ...className
     ] }
     { ...(!isRelative && {
@@ -36,7 +36,7 @@ const needsIcon = !isRelative && wantsIcon;
     { !needsIcon ? (
         <slot />
     ) : (
-        <span class="link-label">
+        <span class="link__label">
             <slot />
         </span>
         <FaArrowUpRightFromSquare />
@@ -47,7 +47,7 @@ const needsIcon = !isRelative && wantsIcon;
         color: light-dark(var(--blue-600), var(--blue-500));
 
         &,
-        &.link-external > .link-label {
+        &.link--external > .link__label {
             text-decoration-line: underline;
             text-decoration-color: currentColor;
             text-decoration-style: dotted;
@@ -60,7 +60,7 @@ const needsIcon = !isRelative && wantsIcon;
         }
     }
 
-    a.link-external {
+    a.link--external {
 		text-decoration: none;
 
 		svg {

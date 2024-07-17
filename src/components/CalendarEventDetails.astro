@@ -15,27 +15,27 @@ const emptyEvent =
     !event.links?.length;
 ---
 
-<div class="event-details">
+<div class="calendar-event__details">
     { event.location && (
-        <div class="event-detail">
+        <div class="calendar-event__detail">
             <h3>Location</h3>
             <p>{ event.location }</p>
         </div>
     ) }
     { event.description && (
-        <div class="event-detail">
+        <div class="calendar-event__detail">
             <h3>Description</h3>
             <p>{ event.description }</p>
         </div>
     ) }
     { event.accessibility && (
-        <div class="event-detail">
+        <div class="calendar-event__detail">
             <h3>Accessibility</h3>
             <p>{ event.accessibility }</p>
         </div>
     ) }
     { event.links?.length && (
-        <div class="event-detail">
+        <div class="calendar-event__detail">
             <h3>Links</h3>
             <ul>
                 { event.links.map(link => (
@@ -49,13 +49,13 @@ const emptyEvent =
         </div>
     ) }
     { emptyEvent && (
-        <div class="event-detail">
+        <div class="calendar-event__detail">
             <p><i>No details available.</i></p>
         </div>
     ) }
 </div>
 <style>
-    .event-details {
+    .calendar-event__details {
         display: flex;
         gap: 0.75rem;
         flex-direction: column;
@@ -64,7 +64,7 @@ const emptyEvent =
         border-top: 1px solid light-dark(var(--zinc-300), var(--zinc-700));
     }
 
-    .event-detail {
+    .calendar-event__detail {
         h3 {
             font-size: 1rem;
             font-weight: 500;

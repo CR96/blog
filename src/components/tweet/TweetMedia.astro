@@ -13,18 +13,18 @@ const length = tweet.mediaDetails?.length ?? 0;
 ---
 
 <div class:list={ [
-    "media-wrapper",
-    { "grid-2": length === 2 },
-    { "grid-3": length === 3 },
-    { "grid-4": length >= 4 }
+    "tweet__media-wrapper",
+    { "tweet__media-wrapper--grid-2": length === 2 },
+    { "tweet__media-wrapper--grid-3": length === 3 },
+    { "tweet__media-wrapper--grid-4": length >= 4 }
 ] }>
     { tweet.mediaDetails?.map(media => (
         media.type === 'photo' ? (
             <a
                 href={ tweet.url }
                 class:list={ [
-                    "media-container",
-                    "media-link"
+                    "tweet__media-container",
+                    "tweet__media-link"
                 ] }
                 target="_blank"
                 rel="noopener noreferrer"
@@ -35,14 +35,14 @@ const length = tweet.mediaDetails?.length ?? 0;
                 />
             </a>
         ) : (
-            <div class="media-container">
+            <div class="tweet__media">
                 <TweetVideo media={ media } />
             </div>
         )
     )) }
 </div>
 <style>
-    .media-wrapper {
+    .tweet__media-wrapper {
         display: grid;
         grid-auto-rows: 1fr;
         gap: 0.25rem;
@@ -52,22 +52,22 @@ const length = tweet.mediaDetails?.length ?? 0;
         border-radius: 0.5rem;
         overflow: hidden;
 
-        &.grid-2,
-        &.grid-3,
-        &.grid-4 {
+        &.tweet__media-wrapper--grid-2,
+        &.tweet__media-wrapper--grid-3,
+        &.tweet__media-wrapper--grid-4 {
             grid-template-columns: repeat(2, 1fr);
         }
     
-        &.grid-3 > :first-child {
+        &.tweet__media-wrapper--grid-3 > :first-child {
             grid-row: span 2;
         }
     
-        &.grid-4 {
+        &.tweet__media-wrapper--grid-4 {
             grid-template-rows: repeat(2, 1fr);
         }
     }
 
-    .media-container {
+    .tweet__media {
         position: relative;
         height: 100%;
         width: 100%;
@@ -79,13 +79,13 @@ const length = tweet.mediaDetails?.length ?? 0;
             aspect-ratio: 8 / 9;
         }
 
-        .grid-3 &,
-        .grid-4 & {
+        .tweet__media-wrapper--grid-3 &,
+        .tweet__media-wrapper--grid-4 & {
             aspect-ratio: 16 / 9;
         }
     }
 
-    .media-link {
+    .tweet__media-link {
         text-decoration: none;
         outline-style: none;
     }

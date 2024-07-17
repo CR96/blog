@@ -20,10 +20,7 @@ if (!tweet) { return; }
 const enrichedTweet = await enrichTweet(tweet);
 ---
 
-<Quote
-    class="tweet-container"
-    useDash={ false }
->
+<Quote useDash={ false }>
     <TweetAuthor tweet={ enrichedTweet } />
     <TweetBody tweet={ enrichedTweet } />
     { tweet.mediaDetails?.length && (

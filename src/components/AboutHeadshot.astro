@@ -3,13 +3,13 @@ import { Image } from "astro:assets";
 import headshotImage from '@images/corey-headshot.png';
 ---
 
-<div class="about-container">
-    <Image src={ headshotImage } alt="Corey in a blue dress shirt and red tie wearing a helmet with his bike in the background" loading="lazy" class="headshot-image" />
-    <p class="text-bubble">Hey, hi, hello, Corey here!</p>
+<div class="about-headshot">
+    <Image src={ headshotImage } alt="Corey in a blue dress shirt and red tie wearing a helmet with his bike in the background" loading="lazy" class="about-headshot__image" />
+    <p class="about-headshot__bubble">Hey, hi, hello, Corey here!</p>
 </div>
 
 <style>
-    .about-container {
+    .about-headshot {
         display: flex;
         gap: 1.5rem;
         align-items: center;
@@ -17,14 +17,14 @@ import headshotImage from '@images/corey-headshot.png';
         padding-right: 1rem;
     }
 
-    .headshot-image {
+    .about-headshot__image {
         max-width: 6rem;
         max-height: 6rem;
         border-radius: 50%;
         object-fit: cover;
     }
 
-    .text-bubble {
+    .about-headshot__bubble {
         padding: 0.75rem 1rem;
         font-size: 0.85rem;
         border-radius: 0.75rem;

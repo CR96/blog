@@ -1,4 +1,4 @@
-.event-container  {
+.calendar-event  {
     background: light-dark(var(--zinc-100), var(--zinc-900));
     border: 1px solid light-dark(var(--zinc-300), var(--zinc-700));
     border-left: 6px solid light-dark(var(--blue-500), var(--blue-600));
@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-.event-disclosure {
+.calendar-event__disclosure {
     width: 100%;
     display: flex;
     align-items: center;
@@ -15,10 +15,10 @@
     padding: 0.75rem 0.95rem;
 }
 
-.event-name {
+.calendar-event__name {
     font-weight: 600;
 }
 
-.event-time {
+.calendar-event__time {
     color: light-dark(var(--zinc-500), var(--zinc-400));
 }

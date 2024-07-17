@@ -5,24 +5,24 @@ const headerId = uniqueId("opinion-header");
 ---
 
 <div
-    class="opinion-container"
+    class="opinion"
     role="group"
     aria-labelledby={ headerId }
 >
-    <div class="opinion-header" id={ headerId }>
+    <div class="opinion__header" id={ headerId }>
         My thoughts 👋
     </div>
     <slot />
 </div>
 <style>
-    .opinion-container {
+    .opinion {
         background: light-dark(#e7ebf3, #1e2229);
         margin-block: 1rem;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
     }
 
-    .opinion-header {
+    .opinion__header {
         font-size: 0.8rem;
         font-weight: 600;
         margin-block: 1rem;

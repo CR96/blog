@@ -8,19 +8,19 @@ interface Props {
 const { tweet } = Astro.props;
 ---
 
-<div class="tweet-author">
+<div class="tweet__author">
     <img
-        class="tweet-profile-picture"
+        class="tweet__profile-picture"
         src={ tweet.user.profile_image_url_https }
         alt={ tweet.user.name }
     />
     { tweet.user.name }
-    <span class="tweet-username">
+    <span class="tweet__username">
         (@{ tweet.user.screen_name })
     </span>
 </div>
 <style>
-    .tweet-author {
+    .tweet__author {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -29,11 +29,15 @@ const { tweet } = Astro.props;
         margin-block: 1rem;
     }
 
-    .tweet-profile-picture {
+    .tweet__profile-picture {
         width: 1.45rem;
         aspect-ratio: 1;
         border-radius: 50%;
         margin-right: 0.25rem;
         padding-bottom: 2px;
+    }
+
+    .tweet__username {
+        font-weight: 400;
     }
 </style>

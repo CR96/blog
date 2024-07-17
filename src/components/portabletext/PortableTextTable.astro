@@ -11,7 +11,7 @@ const headerRows = table.rows.slice(0, numHeader);
 const regularRows = table.rows.slice(numHeader);
 ---
 
-<div class="table-container">
+<div class="table">
     <table>
         { headerRows.length && (
             <thead>
@@ -40,7 +40,7 @@ const regularRows = table.rows.slice(numHeader);
     </table>
 </div>
 <style>
-    .table-container {
+    .table {
         background: light-dark(#fff, var(--zinc-900));
         border: 1px solid light-dark(var(--zinc-200), var(--zinc-800));
         margin-block: 1rem;

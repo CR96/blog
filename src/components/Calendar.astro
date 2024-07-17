@@ -92,9 +92,9 @@ const eventsByDate = eventsExpanded.sort((a, b) => {
 }, {});
 ---
 
-<div class="calendar-container">
+<div class="calendar">
     { Object.keys(eventsByDate).map(date => (
-        <div class="calendar-day">
+        <div class="calendar__day">
             <h2>{ date }</h2>
             { eventsByDate[date].map(event => (
                 <CalendarEvent event={ event! } client:load>
@@ -110,11 +110,11 @@ const eventsByDate = eventsExpanded.sort((a, b) => {
         margin-block: 0.25rem;
     }
 
-    .calendar-container {
+    .calendar {
         margin-block: 2.25rem;
     }
 
-    .calendar-day {
+    .calendar__day {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;

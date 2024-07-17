@@ -3,7 +3,7 @@ import bannerImageLight from "@images/banner-light.png";
 import bannerImageDark from "@images/banner-dark.png";
 ---
 
-<div class="banner-container">
+<div class="banner">
     <picture>
         <source
             srcset={ bannerImageDark.src }
@@ -17,7 +17,7 @@ import bannerImageDark from "@images/banner-dark.png";
     </picture>
 </div>
 <style>
-    .banner-container {
+    .banner {
         width: calc(100vw - 20px);
         margin-left: calc((100vw - 100% - 20px) / -2);
         margin-bottom: 2rem;
