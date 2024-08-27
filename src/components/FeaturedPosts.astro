@@ -1,0 +1,10 @@
+---
+import { sanityClient } from "sanity:client";
+import { featuredPostsQuery } from '@studio/sanity-queries';
+import type { FeaturedPostsQueryResult } from "@studio/sanity-typegen";
+import PostGrid from "@components/PostGrid.astro";
+
+const posts = await sanityClient.fetch<FeaturedPostsQueryResult>(featuredPostsQuery);
+---
+
+<PostGrid posts={ posts } />

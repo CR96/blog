@@ -1,0 +1,23 @@
+---
+import BaseVideo from '@components/common/BaseVideo.astro';
+
+interface Props {
+    playbackId: string
+}
+
+const { playbackId } = Astro.props;
+
+const srcParams = new URLSearchParams();
+srcParams.append('default_subtitles_lang', 'en');
+
+const src =
+    `https://stream.mux.com/${ playbackId }.m3u8?${ srcParams }`;
+const poster =
+    `https://image.mux.com/${ playbackId }/thumbnail.webp`;
+---
+
+<BaseVideo
+    src={ src }
+    poster={ poster }
+    type="application/x-mpegURL"
+/>

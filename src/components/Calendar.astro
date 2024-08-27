@@ -1,0 +1,123 @@
+---
+import { sanityClient } from 'sanity:client';
+import { calendarQuery } from '@studio/sanity-queries';
+import type { CalendarQueryResult } from '@studio/sanity-typegen';
+import { RRule, RRuleSet, DateTime } from 'rrule-rust';
+import { CalendarEvent } from '@components/CalendarEvent';
+import CalendarEventDetails from '@components/CalendarEventDetails.astro';
+
+const events = await sanityClient.fetch<CalendarQueryResult>(calendarQuery);
+
+const convertToDateTime = (date: Date | string) => {
+    if (typeof date === 'string') {
+        date = new Date(date);
+    }
+
+    return DateTime.create(
+        date.getUTCFullYear(),
+        date.getUTCMonth() + 1,
+        date.getUTCDate(),
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds(),
+        true,
+    );
+};
+
+const convertToDate = (dateTime: DateTime) => {
+    return new Date(Date.UTC(
+        dateTime.year,
+        dateTime.month - 1,
+        dateTime.day,
+        dateTime.hour,
+        dateTime.minute,
+        dateTime.second
+    ));
+};
+
+const eventsExpanded = events.map(event => {
+    if (!event.date.endDate) {
+        throw new Error('Events must include an end date');
+    } else if (!event.date.rrule) {
+        return event;
+    }
+
+    const startRule = new RRuleSet({
+        dtstart: convertToDateTime(event.date.startDate),
+        rrules: [
+            RRule.parse(event.date.rrule)
+        ]
+    });
+    const endRule = new RRuleSet({
+        ...startRule.toObject(),
+        dtstart: convertToDateTime(event.date.endDate)
+    });
+
+    const sixWeeksFromToday = new Date();
+    sixWeeksFromToday.setDate(
+        sixWeeksFromToday.getDate() + 6 * 7
+    );
+    const startDates = startRule.between(
+        convertToDateTime(new Date()),
+        convertToDateTime(sixWeeksFromToday),
+        true
+    );
+    const endDates = endRule.all(startDates.length);
+    
+    return startDates.map((instance, index) => {
+        const newEvent = structuredClone(event);
+        newEvent.date.startDate = convertToDate(instance).toISOString();
+        newEvent.date.endDate = convertToDate(endDates[index]).toISOString();
+
+        return newEvent;
+    });
+}).flat();
+
+interface GroupedEvents {
+    [key: string]: CalendarQueryResult;
+}
+
+const eventsByDate = eventsExpanded.sort((a, b) => {
+    return Date.parse(a!.date.startDate) - Date.parse(b!.date.startDate!);
+}).reduce((accumulator : GroupedEvents, current) => {
+    const startDate = new Date(current!.date.startDate);
+    const dateKey = startDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric'
+    });
+    accumulator[dateKey] ??= [];
+    accumulator[dateKey].push(current!);
+    return accumulator;
+}, {});
+---
+
+<div class="calendar">
+    { Object.keys(eventsByDate).map(date => (
+        <div class="calendar__day">
+            <h2>{ date }</h2>
+            { eventsByDate[date].map(event => (
+                <CalendarEvent event={ event! } client:load>
+                    <CalendarEventDetails event={ event! } />
+                </CalendarEvent>
+            )) }
+        </div>
+    )) }
+</div>
+<style>
+    h2 {
+        font-size: 1rem;
+        margin-block: 0.25rem;
+    }
+
+    .calendar {
+        margin-block: 2.25rem;
+    }
+
+    .calendar__day {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+</style>

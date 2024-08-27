@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'blockquote'> {
+    useDash?: boolean
+}
+
+const { useDash = true, ...props } = Astro.props;
+const attribution = await Astro.slots.render('attribution');
+---
+
+<blockquote { ...props }>
+    <slot />
+    { attribution && (
+        <cite>
+            { useDash && '— ' }
+            <slot name="attribution" />
+        </cite>
+    ) }
+</blockquote>
+<style>
+    blockquote {
+        position: relative;
+        margin-inline: 0;
+        padding-block: 0.15rem;
+        padding-left: 1.5rem;
+
+        &::before {
+            position: absolute;
+            content: '';
+            display: block;
+            width: 3px;
+            inset: 0 auto 0 0;
+            border-radius: 1.5px;
+            background-color: light-dark(var(--zinc-300), var(--zinc-600));
+        }
+    }
+
+    cite {
+        display: block;
+        margin-block: 1rem;
+
+        & :global(a) {
+            color: light-dark(var(--zinc-500), var(--zinc-400));
+
+            &:hover,
+            &.active {
+                color: light-dark(var(--zinc-900), var(--zinc-100));
+            }
+        }
+    }
+</style>

@@ -1,0 +1,38 @@
+---
+import { Picture } from 'astro:assets';
+import type { DereferencedPost } from '@studio/sanity-queries';
+
+interface Props {
+    thumbnail: DereferencedPost['thumbnail']
+};
+
+const { thumbnail } = Astro.props;
+
+if (!thumbnail || !thumbnail.asset) { return; }
+
+const { asset } = thumbnail;
+
+if (!asset.url || !asset.metadata?.dimensions) { return; }
+
+const { width = 0, height = 0 } = asset.metadata.dimensions;
+---
+
+<Picture
+    src={ asset.url }
+    alt={ thumbnail.alt ?? '' }
+    widths={ [ 540, 1080, 1520 ] }
+    width={ width }
+    height={ height }
+    sizes={ `
+        (max-width: 540px) 540px,
+        (max-width: 1080px) 1080px,
+        1520px
+    ` }
+/>
+<style>
+    img {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 16 / 9;
+    }
+</style>

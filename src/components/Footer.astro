@@ -1,0 +1,69 @@
+---
+import { FaTwitter, FaMastodon, FaBluesky, FaGithub, FaMedium, FaYoutube, FaRss } from 'react-icons/fa6';
+---
+
+<footer>
+    <ul class="social-links">
+        <li>
+            <a href="/feed.xml">
+                <FaRss title="RSS" />
+            </a>
+        </li>
+        <li>
+            <a href="https://twitter.com/coreyjrowe" target="_blank">
+                <FaTwitter title="Twitter" />
+            </a>
+        </li>
+        <li>
+            <a target="_blank" rel="me" href="https://detmi.social/@coreyjrowe">
+                <FaMastodon title="Mastodon" />
+            </a>
+        </li>
+        <li>
+            <a href="https://bsky.app/profile/coreyjrowe.bsky.social" target="_blank">
+                <FaBluesky title="Bluesky" />
+            </a>
+        </li>
+        <li>
+            <a href="https://github.com/CR96" target="_blank">
+                <FaGithub title="GitHub" />
+            </a>
+        </li>
+        <li>
+            <a href="https://medium.com/@coreyjrowe" target="_blank">
+                <FaMedium title="Medium" />
+            </a>
+        </li>
+        <li>
+            <a href="https://www.youtube.com/@musicalmitten" target="_blank">
+                <FaYoutube title="YouTube" />
+            </a>
+        </li>
+    </ul>
+</footer>
+<style>
+    footer {
+        text-align: center;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .social-links {
+        display: inline-flex;
+        gap: 10px;
+        padding-bottom: 10px;
+
+        a {
+            font-size: 28px;
+            color: light-dark(var(--zinc-500), var(--zinc-400));
+
+            &:hover,
+            &:focus {
+                color: light-dark(var(--blue-700), var(--blue-500));
+            }
+        }
+    }
+</style>

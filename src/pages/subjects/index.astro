@@ -1,0 +1,37 @@
+---
+import { sanityClient } from "sanity:client";
+import { subjectIndexQuery } from "@studio/sanity-queries";
+import type { SubjectIndexQueryResult } from "@studio/sanity-typegen";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Link from "@components/common/Link.astro";
+
+const subjects = await sanityClient.fetch<SubjectIndexQueryResult>(subjectIndexQuery);
+
+interface GroupedSubjects {
+    [key: string]: SubjectIndexQueryResult;
+}
+
+const groupedSubjects = subjects.reduce((accumulator : GroupedSubjects, current) => {
+    const letter = current.name.toUpperCase().charAt(0);
+    accumulator[letter] ??= [];
+    accumulator[letter].push(current);
+    return accumulator;
+}, {});
+const letterHeadings = Object.keys(groupedSubjects);
+---
+
+<BaseLayout title="Subjects">
+    <h1>Subjects</h1>
+    { letterHeadings.map(letter => (
+        <h2>{ letter }</h2>
+        <ul>
+            { groupedSubjects[letter]?.map(subject => (
+                <li>
+                    <Link href={ `/subjects/${subject.slug.current}` }>
+                        { subject.name }
+                    </Link>
+                </li>
+            )) }
+        </ul>
+    )) }
+</BaseLayout>

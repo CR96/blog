@@ -1,0 +1,40 @@
+---
+import PortableText from '@components/portabletext/PortableText.astro';
+import type { PortableTextProps } from 'astro-portabletext/types';
+
+interface Props {
+    caption?: PortableTextProps['value']
+};
+
+const { caption } = Astro.props;
+const captionSlot = Astro.slots.has('caption');
+---
+
+{ (caption || captionSlot) ? (
+    <figure>
+        <slot />
+        <figcaption>
+            { !caption ? (
+                <slot name="caption" />
+            ) : (
+                <PortableText value={ caption } />
+            ) }
+            </slot>
+        </figcaption>
+    </figure>
+) : (
+    <slot />
+) }
+<style>
+    figcaption {
+        color: light-dark(var(--zinc-600), var(--zinc-400));
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1.35;
+        margin-block: 0.25rem 1.25rem;
+
+        & > :global(p:first-child) {
+            margin-top: 0;
+        }
+    }
+</style>

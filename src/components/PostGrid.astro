@@ -1,0 +1,22 @@
+---
+import PostPreview from "@components/PostPreview.astro";
+import type { TopicPageQueryResult } from "@studio/sanity-typegen";
+
+interface Props {
+    posts: TopicPageQueryResult[number]['posts'];
+}
+
+const { posts } = Astro.props;
+---
+<div class="post-grid">
+    { posts.map(post => (
+        <PostPreview post={ post } />
+    )) }
+</div>
+<style>
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 16px;
+	}
+</style>

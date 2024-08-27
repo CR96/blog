@@ -1,0 +1,43 @@
+---
+import { sanityClient } from "sanity:client";
+import { subjectPageQuery } from "@studio/sanity-queries";
+import type { SubjectPageQueryResult } from '@studio/sanity-typegen';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PortableText from "@components/portabletext/PortableText.astro";
+import Link from "@components/common/Link.astro";
+import { generateDatedPostSlug } from "@/util";
+
+export async function getStaticPaths() {
+    const subjects = await sanityClient.fetch<SubjectPageQueryResult>(subjectPageQuery);
+
+    return subjects.map(subject => ({
+        params: { slug: subject.slug.current },
+        props: subject
+    }));
+};
+
+type Props = SubjectPageQueryResult[number];
+const subject = Astro.props;
+---
+
+<BaseLayout title={ subject.name }>
+    <h1>{ subject.name }</h1>
+    { subject?.content && (
+        <PortableText value={ subject.content } />
+    ) }
+
+    <h2>References</h2>
+    <ul>
+        { subject.posts.map(post => {
+            const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
+
+            return (
+                <li>
+                    <Link href={ `/${datedSlug}` }>
+                        { post.title }
+                    </Link>
+                </li>
+            );
+        }) }
+    </ul>
+</BaseLayout>

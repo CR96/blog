@@ -1,0 +1,13 @@
+---
+import Tweet from '@components/tweet/Tweet.astro';
+import CaptionedElement from '@components/CaptionedElement.astro';
+import type { DereferencedContentBlock } from '@studio/sanity-queries';
+
+type Props = DereferencedContentBlock<'tweet'>;
+
+const { id, caption } = Astro.props.node;
+---
+
+<CaptionedElement caption={ caption }>
+    <Tweet id={ id } />
+</CaptionedElement>

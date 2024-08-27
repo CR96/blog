@@ -1,0 +1,33 @@
+---
+import bannerImageLight from "@images/banner-light.png";
+import bannerImageDark from "@images/banner-dark.png";
+---
+
+<div class="banner">
+    <picture>
+        <source
+            srcset={ bannerImageDark.src }
+            media="(prefers-color-scheme: dark)"
+        />
+        <img
+            src={ bannerImageLight.src }
+            alt="Amtrak midwest train with a Siemens Charger locomotive and Venture cars"
+            loading="eager"
+        />
+    </picture>
+</div>
+<style>
+    .banner {
+        width: calc(100vw - 20px);
+        margin-left: calc((100vw - 100% - 20px) / -2);
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+
+    picture {
+        display: block;
+        width: 1040px;
+        max-width: 100%;
+        margin-inline: auto;
+    }
+</style>

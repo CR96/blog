@@ -1,0 +1,86 @@
+---
+import Link from '@components/common/Link.astro';
+import type { Event } from '@studio/sanity-typegen';
+
+interface Props {
+    event: Event
+}
+
+const { event } = Astro.props;
+
+const emptyEvent =
+    !event.location &&
+    !event.description &&
+    !event.accessibility &&
+    !event.links?.length;
+---
+
+<div class="calendar-event__details">
+    { event.location && (
+        <div class="calendar-event__detail">
+            <h3>Location</h3>
+            <p>{ event.location }</p>
+        </div>
+    ) }
+    { event.description && (
+        <div class="calendar-event__detail">
+            <h3>Description</h3>
+            <p>{ event.description }</p>
+        </div>
+    ) }
+    { event.accessibility && (
+        <div class="calendar-event__detail">
+            <h3>Accessibility</h3>
+            <p>{ event.accessibility }</p>
+        </div>
+    ) }
+    { event.links?.length && (
+        <div class="calendar-event__detail">
+            <h3>Links</h3>
+            <ul>
+                { event.links.map(link => (
+                    <li>
+                        <Link href={ link.url }>
+                            { link.label }
+                        </Link>
+                    </li>
+                )) }
+            </ul>
+        </div>
+    ) }
+    { emptyEvent && (
+        <div class="calendar-event__detail">
+            <p><i>No details available.</i></p>
+        </div>
+    ) }
+</div>
+<style>
+    .calendar-event__details {
+        display: flex;
+        gap: 0.75rem;
+        flex-direction: column;
+        margin-inline: 0.75rem;
+        padding-block: 0.95rem 1.25rem;
+        border-top: 1px solid light-dark(var(--zinc-300), var(--zinc-700));
+    }
+
+    .calendar-event__detail {
+        h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-block: 0 0.25rem;
+        }
+
+        p,
+        a {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+</style>

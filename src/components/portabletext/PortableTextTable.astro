@@ -1,0 +1,66 @@
+---
+import type { DereferencedContentBlock } from '@studio/sanity-queries';
+
+type Props = DereferencedContentBlock<'table'>;
+
+const { table, numHeader } = Astro.props.node;
+
+if (!table.rows) { return; }
+
+const headerRows = table.rows.slice(0, numHeader);
+const regularRows = table.rows.slice(numHeader);
+---
+
+<div class="table">
+    <table>
+        { headerRows.length && (
+            <thead>
+                { headerRows.map(row => (
+                    <tr>
+                        { row.cells?.map(cell => (
+                            <th>{ cell }</th>
+                        )) }
+                    </tr>
+                ))
+                }
+            </thead>
+        ) }
+        { regularRows.length && (
+            <tbody>
+                { regularRows.map(row => (
+                    <tr>
+                        { row.cells?.map(cell => (
+                            <td>{ cell }</td>
+                        )) }
+                    </tr>
+                ))
+                }
+            </tbody>
+        ) }
+    </table>
+</div>
+<style>
+    .table {
+        background: light-dark(#fff, var(--zinc-900));
+        border: 1px solid light-dark(var(--zinc-200), var(--zinc-800));
+        margin-block: 1rem;
+        border-radius: 0.5rem;
+        overflow: auto hidden;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-style: hidden;
+    }
+
+    th,
+    td {
+        padding: 0.35rem 0.45rem;
+        border: 1px solid light-dark(var(--zinc-200), var(--zinc-800));
+    }
+
+    th {
+        text-align: left;
+    }
+</style>

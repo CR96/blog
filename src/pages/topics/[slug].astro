@@ -1,0 +1,28 @@
+---
+import { sanityClient } from "sanity:client";
+import { topicPageQuery } from "@studio/sanity-queries";
+import type { TopicPageQueryResult } from "@studio/sanity-typegen";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostGrid from "@components/PostGrid.astro";
+import PortableText from "@components/portabletext/PortableText.astro";
+
+export async function getStaticPaths() {
+    const topics = await sanityClient.fetch<TopicPageQueryResult>(topicPageQuery);
+
+    return topics.map(topic => ({
+        params: { slug: topic.slug.current },
+        props: topic
+    }));
+}
+
+type Props = TopicPageQueryResult[number];
+const topic = Astro.props;
+---
+
+<BaseLayout title={ topic.name }>
+    <h1>{ topic.name }</h1>
+    <PortableText value={ topic.content } />
+
+    <h2>Posts</h2>
+    <PostGrid posts={ topic.posts } />
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import { uniqueId } from '@/util';
+
+const headerId = uniqueId("opinion-header");
+---
+
+<div
+    class="opinion"
+    role="group"
+    aria-labelledby={ headerId }
+>
+    <div class="opinion__header" id={ headerId }>
+        My thoughts 👋
+    </div>
+    <slot />
+</div>
+<style>
+    .opinion {
+        background: light-dark(#e7ebf3, #1e2229);
+        margin-block: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .opinion__header {
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-block: 1rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+</style>

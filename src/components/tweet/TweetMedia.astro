@@ -1,0 +1,101 @@
+---
+import type { EnrichedTweet } from 'react-tweet';
+import { getMediaUrl } from 'react-tweet';
+import TweetVideo from '@components/tweet/TweetVideo.astro';
+
+interface Props {
+    tweet: EnrichedTweet
+}
+
+const { tweet } = Astro.props;
+
+const length = tweet.mediaDetails?.length ?? 0;
+---
+
+<div class:list={ [
+    "tweet__media-wrapper",
+    { "tweet__media-wrapper--grid-2": length === 2 },
+    { "tweet__media-wrapper--grid-3": length === 3 },
+    { "tweet__media-wrapper--grid-4": length >= 4 }
+] }>
+    { tweet.mediaDetails?.map(media => (
+        media.type === 'photo' ? (
+            <a
+                href={ tweet.url }
+                class:list={ [
+                    "tweet__media-container",
+                    "tweet__media-link"
+                ] }
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <img
+                    src={ getMediaUrl(media, 'small') }
+                    alt={ media.ext_alt_text }
+                />
+            </a>
+        ) : (
+            <div class="tweet__media">
+                <TweetVideo media={ media } />
+            </div>
+        )
+    )) }
+</div>
+<style>
+    .tweet__media-wrapper {
+        display: grid;
+        grid-auto-rows: 1fr;
+        gap: 0.25rem;
+        margin-block: 1rem;
+        height: 100%;
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+
+        &.tweet__media-wrapper--grid-2,
+        &.tweet__media-wrapper--grid-3,
+        &.tweet__media-wrapper--grid-4 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    
+        &.tweet__media-wrapper--grid-3 > :first-child {
+            grid-row: span 2;
+        }
+    
+        &.tweet__media-wrapper--grid-4 {
+            grid-template-rows: repeat(2, 1fr);
+        }
+    }
+
+    .tweet__media {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .grid-2 & {
+            aspect-ratio: 8 / 9;
+        }
+
+        .tweet__media-wrapper--grid-3 &,
+        .tweet__media-wrapper--grid-4 & {
+            aspect-ratio: 16 / 9;
+        }
+    }
+
+    .tweet__media-link {
+        text-decoration: none;
+        outline-style: none;
+    }
+
+    img {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        object-fit: cover;
+        object-position: center;
+    }
+</style>

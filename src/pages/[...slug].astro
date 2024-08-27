@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Link from '@components/common/Link.astro';
+import Image from '@components/common/Image.astro';
+
+export async function getStaticPaths() {
+    const markdownPages = await getCollection('markdown');
+    return markdownPages.map(entry => ({
+        params: { slug: entry.slug.replace(/index$/, '') }, props: { entry },
+    }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const components = {
+    a: Link,
+    img: Image
+};
+---
+
+<BaseLayout { ...entry.data }>
+    <Content components={ components } />
+</BaseLayout>

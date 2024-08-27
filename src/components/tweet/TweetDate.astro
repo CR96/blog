@@ -1,0 +1,28 @@
+---
+import Link from '@components/common/Link.astro';
+import type { EnrichedTweet } from 'react-tweet';
+
+interface Props {
+    tweet: EnrichedTweet
+}
+
+const { tweet } = Astro.props;
+
+const createdDate = new Date(tweet.created_at);
+const createdDay = createdDate.toLocaleString(
+    'en-US', { dateStyle: 'long' }
+);
+const createdTime = createdDate.toLocaleString(
+    'en-US', { timeStyle: 'short' }
+).toLowerCase();
+const createdDateFormatted = [
+    createdDay, createdTime
+].join(' • ');
+---
+
+<Link
+    href={ tweet.url }
+    icon={ false }
+>
+    { createdDateFormatted }
+</Link>

@@ -1,0 +1,18 @@
+---
+import Quote from "@components/common/Quote.astro";
+import PortableText from "@components/portabletext/PortableText.astro";
+import type { DereferencedContentBlock } from "@studio/sanity-queries";
+
+type Props = DereferencedContentBlock<'quote'>;
+
+const { quote, attribution } = Astro.props.node;
+---
+
+<Quote>
+    <PortableText value={ quote } />
+    { attribution && (
+        <Fragment slot="attribution">
+            { attribution }
+        </Fragment>
+    ) }
+</Quote>

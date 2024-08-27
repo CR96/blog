@@ -1,0 +1,72 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
+
+interface Props extends HTMLAttributes<'a'> {
+    href: string | URL,
+    class?: string,
+    icon?: boolean
+};
+
+const {
+    href,
+    class: className = '',
+    icon: wantsIcon = true,
+    ...props
+} = Astro.props;
+
+const asURL = new URL(href, Astro.url.origin);
+const isRelative = Astro.url.origin == asURL.origin;
+
+const needsIcon = !isRelative && wantsIcon;
+---
+
+<a
+    href={ href }
+    class:list={ [
+        { 'link--external': needsIcon },
+        ...className
+    ] }
+    { ...(!isRelative && {
+        target: props.target ?? '_blank',
+        rel: props.rel ?? 'noopener noreferrer'
+    }) }
+    { ...props }
+>
+    { !needsIcon ? (
+        <slot />
+    ) : (
+        <span class="link__label">
+            <slot />
+        </span>
+        <FaArrowUpRightFromSquare />
+    ) }
+</a>
+<style>
+    a {
+        color: light-dark(var(--blue-600), var(--blue-500));
+
+        &,
+        &.link--external > .link__label {
+            text-decoration-line: underline;
+            text-decoration-color: currentColor;
+            text-decoration-style: dotted;
+            text-decoration-thickness: 3px;
+        }
+
+        &:hover,
+        &:focus {
+            color: light-dark(var(--blue-800), var(--blue-400));
+        }
+    }
+
+    a.link--external {
+		text-decoration: none;
+
+		svg {
+            font-size: 0.7em;
+            vertical-align: 2px;
+            margin-left: 0.15em;
+        }
+	}
+</style>

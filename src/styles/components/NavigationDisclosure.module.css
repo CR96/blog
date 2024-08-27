@@ -1,0 +1,15 @@
+.nav-disclosure {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: light-dark(var(--zinc-500), var(--zinc-400));
+
+	&:hover,
+	&.active {
+		color: light-dark(var(--zinc-900), var(--zinc-100));
+	}
+
+	svg {
+		margin-top: -0.2em;
+	}
+}

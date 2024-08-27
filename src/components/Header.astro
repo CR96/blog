@@ -1,0 +1,53 @@
+---
+import SkipLink from '@components/SkipLink.astro';
+import NavigationLevel from '@components/NavigationLevel.astro';
+import { sanityClient } from 'sanity:client';
+import { headerQuery } from '@studio/sanity-queries';
+import type { HeaderQueryResult } from '@studio/sanity-typegen';
+import NavigationLink from '@components/NavigationLink.astro';
+import { SITE_TITLE } from '@/consts';
+
+const topics = await sanityClient.fetch<HeaderQueryResult>(headerQuery);
+
+const links = [
+    { label: "Calendar", href: "/calendar" },
+    {
+        label: "Blog",
+        links: topics.map(topic => ({
+            label: topic.name,
+            href: `/topics/${ topic.slug.current }`
+        }))
+    }
+];
+---
+
+<SkipLink />
+<header>
+    <nav>
+        <NavigationLink href="/" class="nav-logo">{ SITE_TITLE }</NavigationLink>
+        <NavigationLevel links={ links } />
+    </nav>
+</header>
+<style>
+	header {
+		position: fixed;
+		background: light-dark(var(--zinc-50), var(--zinc-900));
+		inset: 0 0 auto;
+		padding: 18px 12px;
+		font-size: 0.9rem;
+		z-index: 1;
+		border-bottom: 1px solid light-dark(var(--zinc-200), var(--zinc-800));
+	}
+
+	nav {
+		display: flex;
+		justify-content: space-between;
+		margin-inline: auto;
+		max-width: 760px;
+	}
+
+	.nav-logo {
+		font-weight: 700;
+		color: light-dark(var(--zinc-900), var(--zinc-100));
+	}
+</style>

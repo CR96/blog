@@ -1,0 +1,21 @@
+---
+title: Calendar
+---
+
+import Calendar from '@components/Calendar.astro';
+
+export const buildTime = new Date();
+export const buildTimeFormatted = buildTime.toLocaleDateString(
+    'en-US',
+    { dateStyle: 'full' }
+);
+
+# Calendar of Events
+
+Something missing? [Reach out](/social). If it's transit related, local, and accessible to the general public, I'll add it!
+
+This list of events is also available as a [Google Calendar feed](https://calendar.google.com/calendar/embed?src=4c6cf14f19cbd5f034a55f1b68e97e213e4678c1289724b87cfab56b93191c39%40group.calendar.google.com).
+
+*Last updated on { buildTimeFormatted }.*
+
+<Calendar />

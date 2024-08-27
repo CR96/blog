@@ -1,0 +1,14 @@
+---
+import Video from "@components/common/Video.astro";
+import CaptionedElement from "@components/CaptionedElement.astro";
+import type { DereferencedContentBlock } from '@studio/sanity-queries';
+
+type Props = DereferencedContentBlock<'video'>;
+
+const { video, caption } = Astro.props.node;
+const { asset } = video;
+---
+
+<CaptionedElement caption={ caption }>
+    <Video playbackId={ asset.playbackId } />
+</CaptionedElement>

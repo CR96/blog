@@ -1,0 +1,22 @@
+---
+import { getMediaUrl, getMp4Video } from 'react-tweet';
+import type { MediaVideo, MediaAnimatedGif } from 'react-tweet/api';
+import BaseVideo from '@components/common/BaseVideo.astro';
+
+interface Props {
+    media: MediaVideo | MediaAnimatedGif
+}
+
+const { media } = Astro.props;
+
+const video = media.video_info.variants.find(variant => {
+    return variant.content_type === 'application/x-mpegURL';
+}) ?? getMp4Video(media);
+const poster = getMediaUrl(media, "small");
+---
+
+<BaseVideo
+    src={ video.url }
+    type={ video.content_type }
+    poster={ poster }
+/>

@@ -1,0 +1,27 @@
+---
+import Image from '@components/common/Image.astro';
+import CaptionedElement from '@components/CaptionedElement.astro';
+import type { DereferencedContentBlock } from '@studio/sanity-queries';
+
+type Props = DereferencedContentBlock<'image'>;
+
+const { asset, alt = "", caption } = Astro.props.node;
+
+if (!asset || !asset.url || !asset.metadata?.dimensions) { return; }
+
+const { width = 0, height = 0 } = asset.metadata.dimensions;
+---
+
+<CaptionedElement caption={ caption }>
+    <Image
+        src={ asset.url }
+        alt={ alt }
+        width={ width }
+        height={ height }
+    />
+</CaptionedElement>
+<style>
+    img {
+        width: 100%;
+    }
+</style>

@@ -1,0 +1,19 @@
+---
+import { Picture } from 'astro:assets';
+
+interface Props {
+    src: string
+    alt: string
+    width: number
+    height: number
+}
+---
+
+<Picture
+    widths={ [ 760, 1520 ] }
+    sizes={ `
+        (max-width: 760px) 760px,
+        1520px
+        ` }
+    { ...Astro.props }
+/>

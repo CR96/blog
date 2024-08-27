@@ -1,0 +1,40 @@
+---
+import type { TopicPageQueryResult } from '@studio/sanity-typegen';
+import { generateDatedPostSlug } from "@/util";
+import FormattedDate from '@components/FormattedDate.astro';
+import PostThumbnail from '@components/PostThumbnail.astro';
+
+interface Props {
+    post: TopicPageQueryResult[number]['posts'][number]
+}
+
+const { post } = Astro.props;
+const datedSlug = generateDatedPostSlug(post.datePublished, post.slug.current);
+---
+
+<article>
+    { post?.thumbnail && (
+        <a href={ `/${datedSlug}` }>
+            <PostThumbnail thumbnail={ post.thumbnail } />
+        </a>
+    ) }
+    <h3>
+        <a href={ `/${datedSlug}` }>{ post.title }</a>
+    </h3>
+    <p class="post-metadata">
+        {`Authored `}
+        <FormattedDate date={ new Date(post.datePublished) } />
+    </p>
+</article>
+<style>
+    h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-block: 0.25rem 0.5rem;
+    }
+
+    .post-metadata {
+        font-weight: 300;
+        margin-top: 0;
+    }
+</style>

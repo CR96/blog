@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'video'> {
+    src: string,
+    type: 'video/mp4' | 'application/x-mpegURL'
+}
+
+const { src, type, ...props } = Astro.props;
+
+const VideoElement =
+    type == 'application/x-mpegURL' ? 'hls-video' : 'video';
+---
+
+<VideoElement
+    controls
+    playsinline
+    preload="metadata"
+    src={ src }
+    { ...props }
+/>
+<script>
+    import 'hls-video-element';
+</script>
+<style>
+    video,
+    hls-video {
+        width: 100%;
+        overflow: hidden;
+    }
+</style>
