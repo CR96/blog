@@ -19,4 +19,4 @@ Finally, set up your `.env.local` file with a Sanity API token.
 
 ## Acknowledgements
 
-Thanks to @ivyrze for their work in building the site's foundation, and to @ssagano for the use of their typeface, Nacelle.
+Thanks to [@ivyrze](https://github.com/ivyrze) for their work in building the site's foundation, and to [@ssagano](https://github.com/ssagano) for the use of their typeface, Nacelle.
