@@ -4,7 +4,7 @@ import type { APIRoute } from "astro";
 import { rssFeedQuery } from '@studio/sanity-queries';
 import type { RssFeedQueryResult } from '@studio/sanity-typegen';
 import { generateDatedPostSlug } from "@/util";
-import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+import { SITE_LONG_TITLE, SITE_DESCRIPTION } from '@/consts';
 
 export const GET: APIRoute = async (context) => {
     const posts = await sanityClient.fetch<RssFeedQueryResult>(rssFeedQuery);
@@ -14,7 +14,7 @@ export const GET: APIRoute = async (context) => {
 	}
 
 	return rss({
-		title: SITE_TITLE,
+		title: SITE_LONG_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map(post => {

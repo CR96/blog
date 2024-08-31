@@ -109,7 +109,7 @@ export const topicPageQuery = groq`
 `;
 
 export const rssFeedQuery = groq`
-    *[_type == "post"]
+    *[_type == "post"] | order(datePublished desc)
 `;
 
 export const headerQuery = groq`
