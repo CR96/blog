@@ -28,6 +28,9 @@ export default defineConfig({
             formats: [
                 'image/avif', 'image/webp'
             ]
+        },
+        webAnalytics: {
+            enabled: true
         }
     }),
     integrations: [
