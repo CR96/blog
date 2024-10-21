@@ -1,6 +1,4 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import '@styles/fonts.css';
 import '@styles/global.css';
 
@@ -14,7 +12,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description = '', image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { title, description, image } = Astro.props;
 
 const suffixedTitle = `${title} | ${SITE_TITLE}`;
 ---
@@ -30,18 +28,28 @@ const suffixedTitle = `${title} | ${SITE_TITLE}`;
 <!-- Primary Meta Tags -->
 <title>{suffixedTitle}</title>
 <meta name="title" content={ suffixedTitle } />
-<meta name="description" content={ description } />
+{ description?.length && (
+    <meta name="description" content={ description } />
+) }
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={ Astro.url } />
 <meta property="og:title" content={ suffixedTitle } />
-<meta property="og:description" content={ description } />
-<meta property="og:image" content={ new URL(image, Astro.url) } />
+{ description?.length && (
+    <meta property="og:description" content={ description } />
+) }
+{ image && (
+    <meta property="og:image" content={ image } />
+) }
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={ Astro.url } />
 <meta property="twitter:title" content={ suffixedTitle } />
-<meta property="twitter:description" content={ description } />
-<meta property="twitter:image" content={ new URL(image, Astro.url) } />
+{ description?.length && (
+    <meta property="twitter:description" content={ description } />
+) }
+{ image && (
+    <meta property="twitter:image" content={ image } />
+) }
