@@ -2,8 +2,9 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { muxInput } from "sanity-plugin-mux-input";
-import { recurringDates } from 'sanity-plugin-recurring-dates'
-import { vercelDeployTool } from 'sanity-plugin-vercel-deploy';
+import { recurringDates } from 'sanity-plugin-recurring-dates';
+import { dashboardTool } from "@sanity/dashboard";
+import { vercelWidget } from "sanity-plugin-dashboard-widget-vercel";
 import { table } from "@sanity/table";
 import schemas from "@studio/schemas/schema";
 import deskStructure from "@studio/desk-structure";
@@ -16,6 +17,12 @@ export default defineConfig({
   dataset: import.meta.env.SANITY_STUDIO_DATASET,
   apiVersion: 'v2022-03-07',
   plugins: [
+    dashboardTool({
+        widgets: [
+          vercelWidget(),
+        ],
+      }
+    ),
     structureTool({
       title: 'Content',
       structure: deskStructure
@@ -25,7 +32,6 @@ export default defineConfig({
     }),
     recurringDates(),
     visionTool(),
-    vercelDeployTool(),
     table()
   ],
   schema: {
