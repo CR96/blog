@@ -21,29 +21,33 @@ const isRelative = Astro.url.origin == asURL.origin;
 const needsIcon = !isRelative && wantsIcon;
 ---
 
-<a
-    href={ href }
-    class:list={ [
-        { 'link--external': needsIcon },
-        ...className
-    ] }
-    { ...(!isRelative && {
-        target: props.target ?? '_blank',
-        rel: props.rel ?? 'noopener noreferrer'
-    }) }
-    { ...props }
->
-    { !needsIcon ? (
-        <slot />
-    ) : (
-        <span class="link__label">
+<Fragment>
+    <a
+        href={ href }
+        class:list={ [
+            { 'link--external': needsIcon },
+            ...className
+        ] }
+        { ...(!isRelative && {
+            target: props.target ?? '_blank',
+            rel: props.rel ?? 'noopener noreferrer'
+        }) }
+        { ...props }
+    >
+        { !needsIcon ? (
             <slot />
-        </span>
-        <FaArrowUpRightFromSquare />
-    ) }
-</a>
+        ) : (
+            <span class="link__label">
+                <slot />
+            </span>
+            <FaArrowUpRightFromSquare />
+        ) }
+    </a>
+</Fragment>
+
 <style>
     a {
+        display: inline-block;
         color: light-dark(var(--blue-600), var(--blue-500));
 
         &,
