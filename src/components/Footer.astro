@@ -1,5 +1,6 @@
 ---
 import { FaTwitter, FaMastodon, FaBluesky, FaGithub, FaMedium, FaYoutube, FaRss } from 'react-icons/fa6';
+import { TbRobotOff } from 'react-icons/tb';
 ---
 
 <footer>
@@ -40,21 +41,26 @@ import { FaTwitter, FaMastodon, FaBluesky, FaGithub, FaMedium, FaYoutube, FaRss 
             </a>
         </li>
     </ul>
+    <div class="ai-disclosure">
+        <TbRobotOff aria-label="No AI" />
+        <p>All content on this blog is my own voice.</p>
+    </div>
 </footer>
 <style>
     footer {
         text-align: center;
+        padding-block: 0.75em 1em;
     }
 
     ul {
         list-style: none;
+        margin-block: 0.25em;
         padding-left: 0;
     }
 
     .social-links {
         display: inline-flex;
         gap: 10px;
-        padding-bottom: 10px;
 
         a {
             font-size: 28px;
@@ -64,6 +70,18 @@ import { FaTwitter, FaMastodon, FaBluesky, FaGithub, FaMedium, FaYoutube, FaRss 
             &:focus {
                 color: light-dark(var(--blue-700), var(--blue-500));
             }
+        }
+    }
+
+    .ai-disclosure {
+        display: flex;
+        align-items: center;
+        place-content: center;
+        gap: 0.5em;
+        opacity: 0.7;
+
+        svg {
+            font-size: 1.5em;
         }
     }
 </style>
