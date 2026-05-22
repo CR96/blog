@@ -1,5 +1,5 @@
 ---
-import { getTweet } from 'react-tweet/api';
+import { fetchTweet } from 'react-tweet/api';
 import { enrichTweet } from 'react-tweet';
 import Quote from '@components/common/Quote.astro';
 import TweetAuthor from '@components/tweet/TweetAuthor.astro';
@@ -14,21 +14,21 @@ interface Props {
 
 const { id, quoted = false } = Astro.props;
 
-const tweet = await getTweet(id);
-if (!tweet) { return; }
+const tweet = await fetchTweet(id);
+if (!tweet.data || tweet.tombstone || tweet.notFound) { return; }
 
-const enrichedTweet = await enrichTweet(tweet);
+const enrichedTweet = await enrichTweet(tweet.data);
 ---
 
 <Quote useDash={ false }>
     <TweetAuthor tweet={ enrichedTweet } />
     <TweetBody tweet={ enrichedTweet } />
-    { tweet.mediaDetails?.length && (
+    { tweet.data.mediaDetails?.length && (
         <TweetMedia tweet={ enrichedTweet } />
     ) }
-    { tweet.quoted_tweet && !quoted && (
+    { tweet.data.quoted_tweet && !quoted && (
         <Astro.self
-            id={ tweet.quoted_tweet.id_str }
+            id={ tweet.data.quoted_tweet.id_str }
             quoted={ true }
         />
     ) }
