@@ -6,17 +6,34 @@ import TweetAuthor from '@components/tweet/TweetAuthor.astro';
 import TweetDate from '@components/tweet/TweetDate.astro';
 import TweetBody from '@components/tweet/TweetBody.astro';
 import TweetMedia from '@components/tweet/TweetMedia.astro';
-import Link from '../common/Link.astro';
 
 interface Props {
     id: string,
     quoted?: boolean
 }
 
+const { id, quoted = false } = Astro.props;
 
+const tweet = await fetchTweet(id);
+if (!tweet.data || tweet.tombstone || tweet.notFound) { return; }
+
+const enrichedTweet = await enrichTweet(tweet.data);
 ---
 
-<Fragment>
-    <em>Tweet embeds temporarily removed due to API change. </em>
-    <Link href="https://github.com/vercel/react-tweet/issues/218" target="blank" rel="noopener noreferrer">See issue status</Link>
-</Fragment>
+<Quote useDash={ false }>
+    <TweetAuthor tweet={ enrichedTweet } />
+    <TweetBody tweet={ enrichedTweet } />
+    { tweet.data.mediaDetails?.length && (
+        <TweetMedia tweet={ enrichedTweet } />
+    ) }
+    { tweet.data.quoted_tweet && !quoted && (
+        <Astro.self
+            id={ tweet.data.quoted_tweet.id_str }
+            quoted={ true }
+        />
+    ) }
+    <TweetDate
+        tweet={ enrichedTweet }
+        slot="attribution"
+    />
+</Quote>
